@@ -1,0 +1,3622 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZnWork - 징크(Zn) 전문 건설 마감 커뮤니티</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2a6b3f;
+            --secondary: #3a7b4f;
+            --accent: #4c8c5f;
+            --light: #f8f9fa;
+            --dark: #1a3b2a;
+            --zinc: #5a8c4d;
+            --zinc-light: #e9f5e9;
+            --zinc-dark: #3a6c3d;
+            --admin: #6c757d;
+            --admin-dark: #495057;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7f5;
+            color: #333;
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+        
+        /* 헤더 스타일 */
+        .navbar {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 12px 0;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .navbar-brand i {
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+        
+        /* 히어로 섹션 */
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .hero-description {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* 카드 스타일 */
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 24px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+        
+        .card-header {
+            background: var(--zinc-light);
+            border-bottom: 1px solid #ddd;
+            padding: 16px 20px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 12px 12px 0 0 !important;
+        }
+        
+        .card-body {
+            padding: 20px;
+        }
+        
+        /* 버튼 스타일 */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(42, 107, 63, 0.3);
+        }
+        
+        .btn-zinc {
+            background: linear-gradient(135deg, var(--zinc), var(--zinc-dark));
+            color: white;
+        }
+        
+        .btn-zinc:hover {
+            background: linear-gradient(135deg, var(--zinc-dark), var(--zinc));
+            color: white;
+            box-shadow: 0 6px 15px rgba(90, 140, 77, 0.3);
+        }
+        
+        /* 전문가 섹션 */
+        .expert-card {
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .expert-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 15px;
+            border: 4px solid var(--zinc-light);
+            cursor: pointer;
+        }
+        
+        .expert-actions {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        /* 통계 */
+        .stats-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--zinc);
+            margin-bottom: 5px;
+        }
+        
+        .stats-label {
+            color: var(--dark);
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        
+        /* 전화 문의 배지 */
+        .call-badge {
+            position: fixed;
+            bottom: 70px;
+            right: 30px;
+            z-index: 1000;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--zinc), var(--zinc-dark));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .call-badge:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* 인기글 섹션 */
+        .popular-posts {
+            background-color: white;
+            padding: 60px 0;
+        }
+        
+        .post-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--zinc);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+        }
+        
+        /* 반응형 */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .hero-description {
+                font-size: 1.1rem;
+            }
+            
+            .call-badge {
+                bottom: 60px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            
+            .expert-actions {
+                flex-direction: column;
+            }
+        }
+        
+        /* 게시판 스타일 */
+        .board-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .board-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .post-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .post-item {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+            position: relative;
+        }
+        
+        .post-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        
+        .post-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--dark);
+        }
+        
+        .post-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 14px;
+            color: #6c757d;
+            margin-bottom: 10px;
+        }
+        
+        .post-content {
+            color: #495057;
+            line-height: 1.6;
+        }
+        
+        .post-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .write-btn {
+            background: var(--zinc);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .write-btn:hover {
+            background: var(--zinc-dark);
+            transform: translateY(-2px);
+        }
+        
+        /* 페이지네이션 */
+        .pagination {
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        /* 관리자 패널 - 크게 개선 */
+        .admin-panel {
+            position: fixed;
+            top: 0;
+            right: -1000px;
+            width: 1000px;
+            height: 100vh;
+            background: white;
+            box-shadow: -2px 0 15px rgba(0,0,0,0.15);
+            z-index: 1040;
+            overflow-y: auto;
+            padding: 25px;
+            transition: right 0.3s ease;
+        }
+        
+        .admin-panel.active {
+            right: 0;
+        }
+        
+        .admin-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1039;
+            display: none;
+        }
+        
+        .admin-overlay.active {
+            display: block;
+        }
+        
+        .admin-toggle {
+            position: fixed;
+            top: 120px;
+            right: 0;
+            background: var(--admin-dark);
+            color: white;
+            padding: 12px 18px;
+            border-radius: 5px 0 0 5px;
+            cursor: pointer;
+            z-index: 1038;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        /* 성장형 요소 */
+        .growth-indicator {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-left: 5px;
+        }
+        
+        .growth-up {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .growth-down {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        /* 접근성 향상 */
+        .skip-nav {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--zinc);
+            color: white;
+            padding: 8px;
+            z-index: 1050;
+            transition: top 0.3s;
+        }
+        
+        .skip-nav:focus {
+            top: 0;
+        }
+        
+        /* 간편 로그인 */
+        .quick-login {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+        
+        /* 페이지 컨텐츠 */
+        .page-content {
+            display: none;
+        }
+        
+        .page-content.active {
+            display: block;
+        }
+        
+        /* 로딩 인디케이터 */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .loading.active {
+            display: block;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--zinc);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* 로그인 모달 스타일 */
+        .modal-content {
+            border-radius: 12px;
+            border: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 12px 12px 0 0;
+        }
+        
+        .modal-body {
+            padding: 30px;
+        }
+        
+        .form-control:focus {
+            border-color: var(--zinc);
+            box-shadow: 0 0 0 0.2rem rgba(90, 140, 77, 0.25);
+        }
+        
+        .login-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+        
+        .social-login {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .social-login-btn {
+            flex: 1;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            background: white;
+            transition: all 0.3s;
+        }
+        
+        .social-login-btn:hover {
+            background: #f8f9fa;
+            transform: translateY(-2px);
+        }
+        
+        .admin-only {
+            display: none;
+        }
+        
+        .admin-logged-in .admin-only {
+            display: block;
+        }
+        
+        /* 관리자 편의 기능 */
+        .admin-actions {
+            display: flex;
+            gap: 5px;
+            margin-top: 10px;
+        }
+        
+        .admin-actions button {
+            font-size: 0.8rem;
+            padding: 4px 8px;
+        }
+        
+        .edit-mode .editable {
+            border: 1px dashed #ccc;
+            padding: 5px;
+            margin: 2px 0;
+            border-radius: 4px;
+        }
+        
+        .edit-mode .editable:hover {
+            background-color: #f8f9fa;
+        }
+        
+        /* 마켓 아이템 */
+        .market-item {
+            position: relative;
+        }
+        
+        .market-price {
+            font-weight: bold;
+            color: var(--zinc);
+            font-size: 1.2rem;
+        }
+        
+        /* 사용자 정보 스타일 */
+        .user-info {
+            display: none;
+        }
+        
+        .user-logged-in .user-info {
+            display: block;
+        }
+        
+        .user-logged-in .login-btn {
+            display: none;
+        }
+        
+        /* 관리자 간소화 스타일 - 개선 */
+        .admin-quick-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+        
+        .admin-quick-actions button {
+            flex: 1;
+            min-width: 150px;
+            padding: 12px 16px;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        
+        .admin-section {
+            margin-bottom: 30px;
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .admin-section h5 {
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--zinc-light);
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        /* 글쓰기 모달 */
+        .write-post-modal textarea {
+            min-height: 200px;
+        }
+        
+        /* 이미지 업로드 */
+        .image-upload-container {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .image-upload-btn {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .image-upload-container:hover .image-upload-btn {
+            opacity: 1;
+        }
+        
+        .image-preview {
+            max-width: 100%;
+            max-height: 200px;
+            margin-top: 10px;
+        }
+        
+        /* 견적 문의 모달 */
+        .quote-modal textarea {
+            min-height: 120px;
+        }
+        
+        /* 관리자 간편 수정 테이블 - 크게 개선 */
+        .admin-edit-table {
+            width: 100%;
+            font-size: 1rem;
+        }
+        
+        .admin-edit-table th {
+            background-color: #f8f9fa;
+            padding: 14px 12px;
+            text-align: left;
+            border-bottom: 2px solid #dee2e6;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .admin-edit-table td {
+            padding: 12px;
+            border-bottom: 1px solid #e9ecef;
+            vertical-align: top;
+        }
+        
+        .admin-edit-table input, .admin-edit-table select, .admin-edit-table textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+        
+        .admin-edit-table input:focus, .admin-edit-table select:focus, .admin-edit-table textarea:focus {
+            border-color: var(--zinc);
+            box-shadow: 0 0 0 0.2rem rgba(90, 140, 77, 0.15);
+        }
+        
+        .admin-edit-table textarea {
+            min-height: 100px;
+            resize: vertical;
+            line-height: 1.5;
+        }
+        
+        .admin-edit-table .actions {
+            white-space: nowrap;
+        }
+        
+        .admin-edit-table .actions button {
+            padding: 8px 12px;
+            font-size: 0.9rem;
+            margin: 2px;
+        }
+        
+        /* 접근성 설정 섹션 */
+        .accessibility-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .accessibility-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+        }
+        
+        .accessibility-item .form-check-input {
+            width: 18px;
+            height: 18px;
+        }
+        
+        .accessibility-item .form-check-label {
+            font-size: 1rem;
+        }
+        
+        /* 견적 기록 섹션 스타일 추가 */
+        .quote-history {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .quote-history-item {
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+        }
+        
+        .quote-history-item:last-child {
+            border-bottom: none;
+        }
+        
+        .quote-status {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .quote-status-pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .quote-status-completed {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .quote-status-rejected {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        /* 전문가 전화번호 스타일 */
+        .expert-phone {
+            color: var(--zinc);
+            font-weight: 500;
+            margin: 5px 0;
+        }
+        
+        /* 견적 요청 폼 스타일 개선 */
+        .quote-form-container {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        /* 견적 상세보기 모달 */
+        .quote-detail-modal .modal-body {
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        
+        .quote-detail-section {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .quote-detail-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .quote-detail-label {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+        
+        .quote-detail-content {
+            color: #495057;
+            line-height: 1.6;
+        }
+        
+        /* 견적 요청 아이템 스타일 */
+        .quote-item {
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .quote-item:hover {
+            background-color: #f8f9fa;
+        }
+        
+        /* 관리자 패널 헤더 스타일 */
+        .admin-panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--zinc-light);
+        }
+        
+        .admin-panel-header h4 {
+            font-weight: 700;
+            color: var(--dark);
+            margin: 0;
+        }
+        
+        /* 관리자 패널 닫기 버튼 */
+        .admin-close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #6c757d;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        
+        .admin-close-btn:hover {
+            color: var(--dark);
+        }
+        
+        /* 답변 섹션 스타일 */
+        .comments-section {
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+        
+        .comment-item {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+        }
+        
+        .comment-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: #6c757d;
+            margin-bottom: 5px;
+        }
+        
+        .comment-form {
+            margin-top: 15px;
+        }
+        
+        /* 내 정보 탭 스타일 */
+        .nav-tabs .nav-link.active {
+            background-color: var(--zinc-light);
+            border-color: var(--zinc);
+            color: var(--dark);
+            font-weight: 500;
+        }
+        
+        .user-activity-item {
+            border-bottom: 1px solid #eee;
+            padding: 12px 0;
+        }
+        
+        .user-activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        /* 알림 스타일 */
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #dc3545;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* 회원-전문가 연동 스타일 */
+        .expert-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 접근성 향상을 위한 스킵 네비게이션 -->
+    <a href="#mainContent" class="skip-nav">본문으로 바로가기</a>
+
+    <!-- 네비게이션 바 -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-industry"></i> ZnWork
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="메뉴 토글">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" data-page="home">홈</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-page="community">커뮤니티</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-page="market">자재 마켓</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-page="quote">견적 요청</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link position-relative" href="#" aria-label="알림" id="notificationIcon">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-badge" id="notificationCount" style="display: none;">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" aria-label="메시지"><i class="fas fa-envelope"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-outline-light btn-sm ms-2 login-btn" href="#" id="loginButton" data-bs-toggle="modal" data-bs-target="#loginModal">로그인</a>
+                    </li>
+                    <li class="nav-item user-info">
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-user me-1"></i> <span id="userName"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#userProfileModal">내 정보</a></li>
+                                <li><a class="dropdown-item" href="#" id="logoutButton">로그아웃</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 로그인 모달 -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">ZnWork 로그인</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="닫기"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label for="loginEmail" class="form-label">이메일 주소</label>
+                            <input type="email" class="form-control" id="loginEmail" placeholder="이메일을 입력하세요" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="loginPassword" class="form-label">비밀번호</label>
+                            <input type="password" class="form-control" id="loginPassword" placeholder="비밀번호를 입력하세요" required>
+                        </div>
+                        <div class="login-options">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="rememberLogin">
+                                <label class="form-check-label" for="rememberLogin">
+                                    로그인 상태 유지
+                                </label>
+                            </div>
+                            <a href="#" class="text-decoration-none">비밀번호 찾기</a>
+                        </div>
+                        <button type="submit" class="btn btn-zinc w-100 mt-3">로그인</button>
+                    </form>
+                    
+                    <div class="social-login">
+                        <button class="social-login-btn">
+                            <i class="fab fa-google text-danger"></i> Google
+                        </button>
+                        <button class="social-login-btn">
+                            <i class="fab fa-facebook text-primary"></i> Facebook
+                        </button>
+                        <button class="social-login-btn">
+                            <i class="fab fa-apple"></i> Apple
+                        </button>
+                    </div>
+                    
+                    <div class="text-center mt-3">
+                        <p>계정이 없으신가요? <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#registerModal">회원가입</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 회원가입 모달 -->
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registerModalLabel">ZnWork 회원가입</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="닫기"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="registerForm">
+                        <div class="mb-3">
+                            <label for="registerName" class="form-label">이름</label>
+                            <input type="text" class="form-control" id="registerName" placeholder="이름을 입력하세요" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="registerEmail" class="form-label">이메일 주소</label>
+                            <input type="email" class="form-control" id="registerEmail" placeholder="이메일을 입력하세요" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="registerPassword" class="form-label">비밀번호</label>
+                            <input type="password" class="form-control" id="registerPassword" placeholder="비밀번호를 입력하세요" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="registerPasswordConfirm" class="form-label">비밀번호 확인</label>
+                            <input type="password" class="form-control" id="registerPasswordConfirm" placeholder="비밀번호를 다시 입력하세요" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="userType" class="form-label">회원 유형</label>
+                            <select class="form-select" id="userType" required>
+                                <option value="">회원 유형을 선택하세요</option>
+                                <option value="general">일반 회원</option>
+                                <option value="expert">전문가</option>
+                                <option value="company">업체</option>
+                            </select>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="agreeTerms" required>
+                            <label class="form-check-label" for="agreeTerms">
+                                <a href="#" class="text-decoration-none">이용약관</a> 및 <a href="#" class="text-decoration-none">개인정보처리방침</a>에 동의합니다
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-zinc w-100">회원가입</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 사용자 정보 모달 -->
+    <div class="modal fade" id="userProfileModal" tabindex="-1" aria-labelledby="userProfileModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="userProfileModalLabel">내 정보</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="닫기"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="nav nav-tabs" id="userProfileTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab">기본 정보</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="quote-history-tab" data-bs-toggle="tab" data-bs-target="#quote-history" type="button" role="tab">견적 문의 내역</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="purchase-history-tab" data-bs-toggle="tab" data-bs-target="#purchase-history" type="button" role="tab">구매 문의 내역</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content mt-3" id="userProfileTabsContent">
+                        <div class="tab-pane fade show active" id="profile" role="tabpanel">
+                            <form id="userProfileForm">
+                                <div class="mb-3">
+                                    <label for="profileName" class="form-label">이름</label>
+                                    <input type="text" class="form-control" id="profileName" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="profileEmail" class="form-label">이메일 주소</label>
+                                    <input type="email" class="form-control" id="profileEmail" required readonly>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="profileUserType" class="form-label">회원 유형</label>
+                                    <input type="text" class="form-control" id="profileUserType" readonly>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="currentPassword" class="form-label">현재 비밀번호</label>
+                                    <input type="password" class="form-control" id="currentPassword" placeholder="현재 비밀번호를 입력하세요">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="newPassword" class="form-label">새 비밀번호</label>
+                                    <input type="password" class="form-control" id="newPassword" placeholder="새 비밀번호를 입력하세요">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="confirmPassword" class="form-label">새 비밀번호 확인</label>
+                                    <input type="password" class="form-control" id="confirmPassword" placeholder="새 비밀번호를 다시 입력하세요">
+                                </div>
+                                <button type="submit" class="btn btn-zinc w-100">정보 수정</button>
+                            </form>
+                        </div>
+                        <div class="tab-pane fade" id="quote-history" role="tabpanel">
+                            <div id="userQuoteHistoryContainer">
+                                <!-- 사용자 견적 문의 내역이 여기에 동적으로 추가됩니다 -->
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="purchase-history" role="tabpanel">
+                            <div id="userPurchaseHistoryContainer">
+                                <!-- 사용자 구매 문의 내역이 여기에 동적으로 추가됩니다 -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 글쓰기 모달 -->
+    <div class="modal fade write-post-modal" id="writePostModal" tabindex="-1" aria-labelledby="writePostModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="writePostModalLabel">새 글 작성</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="닫기"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="writePostForm">
+                        <div class="mb-3">
+                            <label for="postTitle" class="form-label">제목</label>
+                            <input type="text" class="form-control" id="postTitle" placeholder="제목을 입력하세요" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="postCategory" class="form-label">카테고리</label>
+                            <select class="form-select" id="postCategory" required>
+                                <option value="">카테고리를 선택하세요</option>
+                                <option value="견적요청">견적요청</option>
+                                <option value="정보">정보</option>
+                                <option value="질문">질문</option>
+                                <option value="후기">후기</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="postContent" class="form-label">내용</label>
+                            <textarea class="form-control" id="postContent" rows="6" placeholder="내용을 입력하세요" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-zinc w-100">글 작성</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 답변 작성 모달 -->
+    <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="commentModalLabel">답변 작성</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="닫기"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="commentForm">
+                        <div class="mb-3">
+                            <label for="commentContent" class="form-label">답변 내용</label>
+                            <textarea class="form-control" id="commentContent" rows="4" placeholder="답변 내용을 입력하세요" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-zinc w-100">답변 작성</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 견적 문의 모달 -->
+    <div class="modal fade quote-modal" id="quoteModal" tabindex="-1" aria-labelledby="quoteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="quoteModalLabel">전문가 견적 문의</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="닫기"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="quoteForm">
+                        <div class="mb-3">
+                            <label for="expertName" class="form-label">전문가</label>
+                            <input type="text" class="form-control" id="expertName" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="quoteTitle" class="form-label">제목</label>
+                            <input type="text" class="form-control" id="quoteTitle" placeholder="견적 문의 제목" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="quoteContent" class="form-label">상세 내용</label>
+                            <textarea class="form-control" id="quoteContent" rows="4" placeholder="견적 요청에 대한 상세 내용을 입력해주세요" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="quoteBudget" class="form-label">예산 범위</label>
+                            <select class="form-select" id="quoteBudget">
+                                <option value="">예산 범위 선택 (선택사항)</option>
+                                <option value="100만원 미만">100만원 미만</option>
+                                <option value="100~300만원">100~300만원</option>
+                                <option value="300~500만원">300~500만원</option>
+                                <option value="500~1000만원">500~1000만원</option>
+                                <option value="1000만원 이상">1000만원 이상</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="quoteDeadline" class="form-label">희망 마감일</label>
+                            <input type="date" class="form-control" id="quoteDeadline">
+                        </div>
+                        <button type="submit" class="btn btn-zinc w-100">견적 문의 보내기</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 견적 상세보기 모달 -->
+    <div class="modal fade quote-detail-modal" id="quoteDetailModal" tabindex="-1" aria-labelledby="quoteDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="quoteDetailModalLabel">견적 요청 상세 정보</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="닫기"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="quote-detail-section">
+                        <div class="quote-detail-label">제목</div>
+                        <div class="quote-detail-content" id="detailTitle"></div>
+                    </div>
+                    <div class="quote-detail-section">
+                        <div class="quote-detail-label">작성자</div>
+                        <div class="quote-detail-content" id="detailAuthor"></div>
+                    </div>
+                    <div class="quote-detail-section">
+                        <div class="quote-detail-label">작업 종류</div>
+                        <div class="quote-detail-content" id="detailType"></div>
+                    </div>
+                    <div class="quote-detail-section">
+                        <div class="quote-detail-label">상세 설명</div>
+                        <div class="quote-detail-content" id="detailContent"></div>
+                    </div>
+                    <div class="quote-detail-section">
+                        <div class="quote-detail-label">예산 범위</div>
+                        <div class="quote-detail-content" id="detailBudget"></div>
+                    </div>
+                    <div class="quote-detail-section">
+                        <div class="quote-detail-label">마감일</div>
+                        <div class="quote-detail-content" id="detailDeadline"></div>
+                    </div>
+                    <div class="quote-detail-section">
+                        <div class="quote-detail-label">지역</div>
+                        <div class="quote-detail-content" id="detailLocation"></div>
+                    </div>
+                    <div class="quote-detail-section">
+                        <div class="quote-detail-label">연락처</div>
+                        <div class="quote-detail-content" id="detailContact"></div>
+                    </div>
+                    <div class="quote-detail-section">
+                        <div class="quote-detail-label">상태</div>
+                        <div class="quote-detail-content" id="detailStatus"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 구매 문의 모달 -->
+    <div class="modal fade" id="purchaseModal" tabindex="-1" aria-labelledby="purchaseModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="purchaseModalLabel">구매 문의</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="닫기"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="purchaseForm">
+                        <div class="mb-3">
+                            <label for="productName" class="form-label">상품명</label>
+                            <input type="text" class="form-control" id="productName" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="purchaseQuantity" class="form-label">수량</label>
+                            <input type="number" class="form-control" id="purchaseQuantity" min="1" value="1" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="purchaseContent" class="form-label">문의 내용</label>
+                            <textarea class="form-control" id="purchaseContent" rows="4" placeholder="구매 문의에 대한 상세 내용을 입력해주세요" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="purchaseContact" class="form-label">연락처</label>
+                            <input type="text" class="form-control" id="purchaseContact" placeholder="연락처를 입력해주세요" required>
+                        </div>
+                        <button type="submit" class="btn btn-zinc w-100">구매 문의 보내기</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 이미지 업로드 모달 -->
+    <div class="modal fade" id="imageUploadModal" tabindex="-1" aria-labelledby="imageUploadModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="imageUploadModalLabel">이미지 업로드</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="닫기"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="imageUploadForm">
+                        <div class="mb-3">
+                            <label for="imageUrl" class="form-label">이미지 URL</label>
+                            <input type="url" class="form-control" id="imageUrl" placeholder="https://example.com/image.jpg" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="imageFile" class="form-label">또는 파일 업로드</label>
+                            <input type="file" class="form-control" id="imageFile" accept="image/*">
+                        </div>
+                        <div id="imagePreviewContainer" class="mb-3" style="display: none;">
+                            <p class="small">미리보기:</p>
+                            <img id="imagePreview" class="image-preview" src="" alt="미리보기">
+                        </div>
+                        <button type="submit" class="btn btn-zinc w-100">이미지 적용</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 간편 로그인 버튼 -->
+    <div class="quick-login">
+        <button class="btn btn-zinc btn-sm" data-bs-toggle="tooltip" data-bs-placement="right" title="빠른 관리자 접속" id="quickAdminLogin">
+            <i class="fas fa-user-cog"></i>
+        </button>
+    </div>
+
+    <!-- 관리자 패널 토글 버튼 -->
+    <div class="admin-toggle admin-only" id="adminPanelToggle">
+        관리자 패널
+    </div>
+
+    <!-- 관리자 패널 - 크게 개선 -->
+    <div class="admin-panel" id="adminPanel">
+        <div class="admin-panel-header">
+            <h4>ZnWork 관리자 패널</h4>
+            <button class="admin-close-btn" id="closeAdminPanel">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <!-- 빠른 작업 버튼 -->
+        <div class="admin-quick-actions">
+            <button class="btn btn-zinc" id="addExpertBtn">
+                <i class="fas fa-user-plus me-2"></i>전문가 추가
+            </button>
+            <button class="btn btn-zinc" id="addPostBtn">
+                <i class="fas fa-edit me-2"></i>게시글 추가
+            </button>
+            <button class="btn btn-zinc" id="addMarketItemBtn">
+                <i class="fas fa-box me-2"></i>상품 추가
+            </button>
+            <button class="btn btn-zinc" id="addQuoteBtn">
+                <i class="fas fa-file-invoice me-2"></i>견적 추가
+            </button>
+            <button class="btn btn-zinc" id="addUserBtn">
+                <i class="fas fa-user-plus me-2"></i>회원 추가
+            </button>
+        </div>
+        
+        <!-- 콘텐츠 관리 섹션 -->
+        <div class="admin-section">
+            <h5><i class="fas fa-cog me-2"></i>사이트 설정</h5>
+            <div class="mb-3">
+                <label class="form-label">사이트 제목</label>
+                <input type="text" class="form-control" id="siteTitle" value="ZnWork - 징크(Zn) 전문 건설 마감 커뮤니티">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">연락처</label>
+                <input type="text" class="form-control" id="siteContact" value="02-1234-5678">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">메인 배너 이미지 URL</label>
+                <input type="text" class="form-control" id="heroImageUrl" value="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80">
+            </div>
+            <button class="btn btn-zinc w-100" id="saveSiteSettings">
+                <i class="fas fa-save me-2"></i>사이트 설정 저장
+            </button>
+        </div>
+        
+        <!-- 회원 관리 섹션 -->
+        <div class="admin-section">
+            <h5><i class="fas fa-users me-2"></i>회원 관리</h5>
+            <div class="table-responsive">
+                <table class="admin-edit-table">
+                    <thead>
+                        <tr>
+                            <th>이름</th>
+                            <th>이메일</th>
+                            <th>회원 유형</th>
+                            <th>전문가 등록</th>
+                            <th>작업</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersTableBody">
+                        <!-- 회원 테이블 내용이 여기에 동적으로 추가됩니다 -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- 전문가 관리 섹션 -->
+        <div class="admin-section">
+            <h5><i class="fas fa-user-tie me-2"></i>전문가 관리</h5>
+            <div class="table-responsive">
+                <table class="admin-edit-table">
+                    <thead>
+                        <tr>
+                            <th>이름</th>
+                            <th>전문분야</th>
+                            <th>경력</th>
+                            <th>지역</th>
+                            <th>전화번호</th>
+                            <th>이미지 URL</th>
+                            <th>작업</th>
+                        </tr>
+                    </thead>
+                    <tbody id="expertsTableBody">
+                        <!-- 전문가 테이블 내용이 여기에 동적으로 추가됩니다 -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- 커뮤니티 관리 섹션 -->
+        <div class="admin-section">
+            <h5><i class="fas fa-comments me-2"></i>커뮤니티 관리</h5>
+            <div class="table-responsive">
+                <table class="admin-edit-table">
+                    <thead>
+                        <tr>
+                            <th>제목</th>
+                            <th>작성자</th>
+                            <th>카테고리</th>
+                            <th>답변 수</th>
+                            <th>작업</th>
+                        </tr>
+                    </thead>
+                    <tbody id="postsTableBody">
+                        <!-- 게시글 테이블 내용이 여기에 동적으로 추가됩니다 -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- 자재 마켓 관리 섹션 -->
+        <div class="admin-section">
+            <h5><i class="fas fa-store me-2"></i>자재 마켓 관리</h5>
+            <div class="table-responsive">
+                <table class="admin-edit-table">
+                    <thead>
+                        <tr>
+                            <th>상품명</th>
+                            <th>가격</th>
+                            <th>카테고리</th>
+                            <th>구매 문의 수</th>
+                            <th>작업</th>
+                        </tr>
+                    </thead>
+                    <tbody id="marketItemsTableBody">
+                        <!-- 마켓 아이템 테이블 내용이 여기에 동적으로 추가됩니다 -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- 견적 요청 관리 섹션 -->
+        <div class="admin-section">
+            <h5><i class="fas fa-file-invoice-dollar me-2"></i>견적 요청 관리</h5>
+            <div class="table-responsive">
+                <table class="admin-edit-table">
+                    <thead>
+                        <tr>
+                            <th>제목</th>
+                            <th>요청자</th>
+                            <th>지역</th>
+                            <th>상태</th>
+                            <th>작업</th>
+                        </tr>
+                    </thead>
+                    <tbody id="quotesTableBody">
+                        <!-- 견적 요청 테이블 내용이 여기에 동적으로 추가됩니다 -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- 접근성 설정 섹션 -->
+        <div class="admin-section">
+            <h5><i class="fas fa-universal-access me-2"></i>접근성 설정</h5>
+            <div class="accessibility-grid">
+                <div class="accessibility-item">
+                    <input class="form-check-input" type="checkbox" id="guestView" checked>
+                    <label class="form-check-label" for="guestView">비회원 글 보기 허용</label>
+                </div>
+                <div class="accessibility-item">
+                    <input class="form-check-input" type="checkbox" id="guestQuote" checked>
+                    <label class="form-check-label" for="guestQuote">비회원 견적 요청 허용</label>
+                </div>
+                <div class="accessibility-item">
+                    <input class="form-check-input" type="checkbox" id="guestMarket" checked>
+                    <label class="form-check-label" for="guestMarket">비회원 마켓 조회 허용</label>
+                </div>
+                <div class="accessibility-item">
+                    <input class="form-check-input" type="checkbox" id="expertApply" checked>
+                    <label class="form-check-label" for="expertApply">전문가 신청 허용</label>
+                </div>
+                <div class="accessibility-item">
+                    <input class="form-check-input" type="checkbox" id="autoApprove" checked>
+                    <label class="form-check-label" for="autoApprove">게시글 자동 승인</label>
+                </div>
+                <div class="accessibility-item">
+                    <input class="form-check-input" type="checkbox" id="emailNotification" checked>
+                    <label class="form-check-label" for="emailNotification">이메일 알림 활성화</label>
+                </div>
+                <div class="accessibility-item">
+                    <input class="form-check-input" type="checkbox" id="smsNotification">
+                    <label class="form-check-label" for="smsNotification">SMS 알림 활성화</label>
+                </div>
+                <div class="accessibility-item">
+                    <input class="form-check-input" type="checkbox" id="darkMode">
+                    <label class="form-check-label" for="darkMode">다크 모드 지원</label>
+                </div>
+            </div>
+            <button class="btn btn-zinc w-100 mt-3" id="saveAccessSettings">
+                <i class="fas fa-save me-2"></i>접근성 설정 저장
+            </button>
+        </div>
+        
+        <!-- 통계 섹션 -->
+        <div class="admin-section">
+            <h5><i class="fas fa-chart-bar me-2"></i>사이트 통계</h5>
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>전체 회원</span>
+                        <span>1,247명 <span class="growth-indicator growth-up">+2.3%</span></span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>견적 요청</span>
+                        <span>893건 <span class="growth-indicator growth-up">+5.1%</span></span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span>커뮤니티 글</span>
+                        <span>5,621개 <span class="growth-indicator growth-up">+3.7%</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="admin-overlay" id="adminOverlay"></div>
+
+    <!-- 페이지 컨텐츠 -->
+    <main id="mainContent">
+        <!-- 홈 페이지 -->
+        <div class="page-content active" id="homePage">
+            <!-- 히어로 섹션 -->
+            <section class="hero-section" id="heroSection">
+                <div class="container text-center">
+                    <h1 class="hero-title editable">징크(Zn) 전문 건설 마감 커뮤니티</h1>
+                    <p class="hero-description editable">
+                        ZnWork는 징크(아연 도금) 전문 건설 마감 분야의 정보 공유와 전문가 연결을 위한 플랫폼입니다.
+                        기술 자료, 전문가 찾기, 견적 요청 등 다양한 서비스를 제공합니다.
+                    </p>
+                    <div class="mt-4">
+                        <button class="btn btn-light btn-lg me-2" data-bs-toggle="modal" data-bs-target="#registerModal">회원가입</button>
+                        <button class="btn btn-outline-light btn-lg" data-bs-toggle="modal" data-bs-target="#loginModal">로그인</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 인기글 섹션 -->
+            <section class="popular-posts">
+                <div class="container">
+                    <h2 class="text-center mb-4 editable">인기글</h2>
+                    <div class="row" id="popularPostsContainer">
+                        <!-- 인기글 카드가 여기에 동적으로 추가됩니다 -->
+                    </div>
+                    <div class="text-center mt-4">
+                        <a href="#" class="btn btn-zinc" data-page="community">더 많은 글 보기</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 주요 기능 섹션 -->
+            <section class="py-5">
+                <div class="container">
+                    <h2 class="text-center mb-5 editable">ZnWork 주요 기능</h2>
+                    <div class="row">
+                        <div class="col-md-4 mb-4">
+                            <a href="#" class="text-decoration-none text-dark" data-page="community">
+                                <div class="card h-100 text-center">
+                                    <div class="card-body">
+                                        <div class="display-4 text-zinc mb-3">
+                                            <i class="fas fa-comments"></i>
+                                        </div>
+                                        <h5 class="card-title editable">커뮤니티</h5>
+                                        <p class="card-text editable">징크 관련 다양한 주제로 소통하고 정보를 공유할 수 있는 공간입니다.</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <a href="#" class="text-decoration-none text-dark" data-page="market">
+                                <div class="card h-100 text-center">
+                                    <div class="card-body">
+                                        <div class="display-4 text-zinc mb-3">
+                                            <i class="fas fa-store"></i>
+                                        </div>
+                                        <h5 class="card-title editable">자재 마켓</h5>
+                                        <p class="card-text editable">징크 관련 자재를 구매하거나 판매할 수 있는 마켓플레이스입니다.</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <a href="#" class="text-decoration-none text-dark" data-page="quote">
+                                <div class="card h-100 text-center">
+                                    <div class="card-body">
+                                        <div class="display-4 text-zinc mb-3">
+                                            <i class="fas fa-file-invoice-dollar"></i>
+                                        </div>
+                                        <h5 class="card-title editable">견적 요청</h5>
+                                        <p class="card-text editable">프로젝트에 맞는 징크 작업 견적을 요청하고 비교할 수 있습니다.</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 전문가 섹션 -->
+            <section class="py-5 bg-light">
+                <div class="container">
+                    <h2 class="text-center mb-5 editable">인기 전문가</h2>
+                    <div class="row" id="expertsContainer">
+                        <!-- 전문가 카드가 여기에 동적으로 추가됩니다 -->
+                    </div>
+                    <div class="text-center mt-4">
+                        <a href="#" class="btn btn-zinc">더 많은 전문가 보기</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 통계 섹션 -->
+            <section class="py-5">
+                <div class="container">
+                    <div class="row text-center">
+                        <div class="col-md-3 mb-4">
+                            <div class="stats-number">1,247</div>
+                            <div class="stats-label">전체 회원</div>
+                        </div>
+                        <div class="col-md-3 mb-4">
+                            <div class="stats-number">893</div>
+                            <div class="stats-label">견적 요청</div>
+                        </div>
+                        <div class="col-md-3 mb-4">
+                            <div class="stats-number">5,621</div>
+                            <div class="stats-label">커뮤니티 글</div>
+                        </div>
+                        <div class="col-md-3 mb-4">
+                            <div class="stats-number">342</div>
+                            <div class="stats-label">등록 전문가</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- 커뮤니티 페이지 -->
+        <div class="page-content" id="communityPage">
+            <div class="board-container">
+                <div class="board-header">
+                    <h2 class="editable">커뮤니티</h2>
+                    <button class="write-btn" id="writePostBtn">
+                        <i class="fas fa-pen me-1"></i> 글쓰기
+                    </button>
+                </div>
+                
+                <ul class="post-list" id="communityPostsList">
+                    <!-- 커뮤니티 게시글이 여기에 동적으로 추가됩니다 -->
+                </ul>
+                
+                <nav aria-label="페이지 네비게이션">
+                    <ul class="pagination">
+                        <li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">다음</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <!-- 자재 마켓 페이지 -->
+        <div class="page-content" id="marketPage">
+            <div class="container py-5">
+                <h2 class="text-center mb-5 editable">자재 마켓</h2>
+                
+                <div class="row mb-4">
+                    <div class="col-md-8">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="자재명 또는 브랜드로 검색">
+                            <button class="btn btn-zinc">검색</button>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <select class="form-select">
+                            <option>전체 카테고리</option>
+                            <option>징크 도료</option>
+                            <option>마감 도구</option>
+                            <option>보조 자재</option>
+                            <option>안전 장비</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="row" id="marketItemsContainer">
+                    <!-- 마켓 아이템이 여기에 동적으로 추가됩니다 -->
+                </div>
+            </div>
+        </div>
+
+        <!-- 견적 요청 페이지 -->
+        <div class="page-content" id="quotePage">
+            <div class="container py-5">
+                <h2 class="text-center mb-5 editable">견적 요청</h2>
+                
+                <!-- 견적 요청 폼 -->
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="quote-form-container">
+                            <div class="card-header bg-zinc text-white mb-4">
+                                <h4 class="mb-0">새 견적 요청</h4>
+                            </div>
+                            <form id="quoteRequestForm">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">제목</label>
+                                        <input type="text" class="form-control" id="quoteRequestTitle" placeholder="견적 요청 제목" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">작업 종류</label>
+                                        <select class="form-select" id="quoteRequestType" required>
+                                            <option value="">선택하세요</option>
+                                            <option value="아연 도금">아연 도금</option>
+                                            <option value="도금 파이프 설치">도금 파이프 설치</option>
+                                            <option value="강구조물 도금">강구조물 도금</option>
+                                            <option value="기타">기타</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label class="form-label">상세 설명</label>
+                                    <textarea class="form-control" id="quoteRequestContent" rows="5" placeholder="작업에 대한 상세한 설명을 입력해주세요. 규모, 재료, 마감일 등" required></textarea>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">예산 범위 (선택사항)</label>
+                                        <select class="form-select" id="quoteRequestBudget">
+                                            <option value="">선택하세요</option>
+                                            <option value="100만원 미만">100만원 미만</option>
+                                            <option value="100~500만원">100~500만원</option>
+                                            <option value="500~1000만원">500~1000만원</option>
+                                            <option value="1000만원 이상">1000만원 이상</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">마감일</label>
+                                        <input type="date" class="form-control" id="quoteRequestDeadline">
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">지역</label>
+                                        <input type="text" class="form-control" id="quoteRequestLocation" placeholder="서울시 강남구" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">연락처</label>
+                                        <input type="text" class="form-control" id="quoteRequestContact" placeholder="010-1234-5678" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-zinc btn-lg">견적 요청하기</button>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <!-- 견적 기록 섹션 (로그인한 사용자에게만 표시) -->
+                        <div class="quote-history mt-5" id="quoteHistorySection" style="display: none;">
+                            <h4 class="mb-4">나의 견적 기록</h4>
+                            <div id="quoteHistoryContainer">
+                                <!-- 견적 기록이 여기에 동적으로 추가됩니다 -->
+                            </div>
+                        </div>
+                        
+                        <!-- 최근 견적 요청 섹션 -->
+                        <div class="mt-5">
+                            <h4 class="mb-4">최근 견적 요청</h4>
+                            <div id="recentQuotesContainer">
+                                <!-- 최근 견적 요청이 여기에 동적으로 추가됩니다 -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 전화 문의 배지 -->
+    <div class="call-badge" data-bs-toggle="tooltip" data-bs-placement="left" title="전화 문의">
+        <i class="fas fa-phone"></i>
+    </div>
+
+    <!-- 로딩 인디케이터 -->
+    <div class="loading" id="loadingIndicator">
+        <div class="spinner"></div>
+        <p>로딩 중...</p>
+    </div>
+
+    <!-- Bootstrap 및 jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // 샘플 데이터
+        const sampleData = {
+            experts: [
+                {
+                    id: 1,
+                    name: "김도금",
+                    specialty: "징크 도금 전문가",
+                    experience: "15년 경력",
+                    location: "서울특별시",
+                    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    description: "HDG, EG, 도금 두께 측정 등 다양한 경험 보유",
+                    phone: "010-1234-5678",
+                    userId: 3 // 전문가와 회원 연동을 위한 userId
+                },
+                {
+                    id: 2,
+                    name: "이시공",
+                    specialty: "징크 시공 전문가",
+                    experience: "12년 경력",
+                    location: "경기도",
+                    image: "https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    description: "파이프, 구조물, 건축 마감 등 다양한 시공 경험",
+                    phone: "010-2345-6789",
+                    userId: null
+                },
+                {
+                    id: 3,
+                    name: "박품질",
+                    specialty: "품질 관리 전문가",
+                    experience: "10년 경력",
+                    location: "인천시",
+                    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    description: "도금 품질 검사, 시험, 인증 관련 전문가",
+                    phone: "010-3456-7890",
+                    userId: null
+                }
+            ],
+            posts: [
+                {
+                    id: 1,
+                    title: "아연 도금 파이프 견적 문의합니다",
+                    author: "홍길동",
+                    date: "2023.10.15",
+                    views: 128,
+                    comments: 5,
+                    content: "약 100m 길이의 아연 도금 파이프 설치 견적 문의드립니다. 상세 스펙은 파이프 직경 50mm, 두께 2.5mm, HDG 방식으로 희망합니다. 서울 강남구 지역입니다.",
+                    category: "견적요청",
+                    commentsList: [
+                        {
+                            id: 1,
+                            author: "김도금",
+                            date: "2023.10.16",
+                            content: "안녕하세요. 아연 도금 파이프 견적 문의 주셨네요. 상세 내용 확인 후 견적서 보내드리겠습니다."
+                        },
+                        {
+                            id: 2,
+                            author: "이시공",
+                            date: "2023.10.16",
+                            content: "해당 규격으로 시공 가능합니다. 현장 확인 후 정확한 견적 드리겠습니다."
+                        }
+                    ]
+                },
+                {
+                    id: 2,
+                    title: "징크 도금의 내식성 향상 방법",
+                    author: "김기술",
+                    date: "2023.10.12",
+                    views: 95,
+                    comments: 12,
+                    content: "징크 도금의 내식성을 높이기 위한 다양한 방법과 주의사항에 대해 설명합니다. 특히 해양 환경이나 산업 지역에서의 사용을 고려할 때 중요한 요소들에 대해 다루겠습니다.",
+                    category: "정보",
+                    commentsList: [
+                        {
+                            id: 1,
+                            author: "박품질",
+                            date: "2023.10.13",
+                            content: "좋은 정보 감사합니다. 추가로 도금 두께에 따른 내식성 차이도 설명해주시면 더욱 도움이 될 것 같습니다."
+                        }
+                    ]
+                },
+                {
+                    id: 3,
+                    title: "HDG와 EG의 차이점이 뭔가요?",
+                    author: "이학생",
+                    date: "2023.10.10",
+                    views: 87,
+                    comments: 8,
+                    content: "Hot Dip Galvanizing과 Electro Galvanizing의 차이점과 각각의 장단점에 대해 궁금합니다. 어떤 상황에서 어떤 방식을 선택하는 것이 좋은지 조언 부탁드립니다.",
+                    category: "질문",
+                    commentsList: []
+                }
+            ],
+            marketItems: [
+                {
+                    id: 1,
+                    name: "고급 징크 도료 20L",
+                    description: "내구성과 방청 효과가 뛰어난 고급 징크 도료",
+                    price: "₩85,000",
+                    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
+                    category: "징크 도료",
+                    purchaseInquiries: 5
+                },
+                {
+                    id: 2,
+                    name: "프로페셔널 스프레이 건",
+                    description: "고압 분사로 균일한 코팅이 가능한 전문가용 스프레이 건",
+                    price: "₩120,000",
+                    image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
+                    category: "마감 도구",
+                    purchaseInquiries: 3
+                },
+                {
+                    id: 3,
+                    name: "전문가용 안전 장비 세트",
+                    description: "마스크, 장갑, 보호복으로 구성된 안전 장비 세트",
+                    price: "₩45,000",
+                    image: "https://images.unsplash.com/photo-1583512603806-077998240c7a?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
+                    category: "안전 장비",
+                    purchaseInquiries: 8
+                }
+            ],
+            quotes: [
+                {
+                    id: 1,
+                    title: "아연 도금 파이프 견적 문의합니다",
+                    author: "홍길동",
+                    date: "2023.10.15",
+                    location: "서울시 강남구",
+                    budget: "500~1000만원",
+                    deadline: "2023.11.15",
+                    content: "약 100m 길이의 아연 도금 파이프 설치 견적 문의드립니다. 상세 스펙은 파이프 직경 50mm, 두께 2.5mm, HDG 방식으로 희망합니다. 서울 강남구 지역입니다.",
+                    status: "모집중",
+                    type: "아연 도금",
+                    contact: "010-1234-5678"
+                },
+                {
+                    id: 2,
+                    title: "공장 철골 구조물 도금 견적 요청",
+                    author: "김공장",
+                    date: "2023.10.10",
+                    location: "경기도 안산시",
+                    budget: "1000만원 이상",
+                    deadline: "2023.11.10",
+                    content: "공장 내부 철골 구조물 약 50톤 정도 도금 견적 요청드립니다. 현장 방문 가능하신 분优先",
+                    status: "완료",
+                    type: "강구조물 도금",
+                    contact: "010-5678-1234"
+                }
+            ],
+            users: [
+                {
+                    id: 1,
+                    name: "관리자",
+                    email: "admin@znwork.com",
+                    password: "admin123",
+                    userType: "admin",
+                    isExpert: false
+                },
+                {
+                    id: 2,
+                    name: "홍길동",
+                    email: "user@example.com",
+                    password: "user123",
+                    userType: "general",
+                    isExpert: false
+                },
+                {
+                    id: 3,
+                    name: "김전문가",
+                    email: "expert@example.com",
+                    password: "expert123",
+                    userType: "expert",
+                    isExpert: true
+                }
+            ],
+            // 견적 기록 데이터 추가
+            quoteHistory: [
+                {
+                    id: 1,
+                    title: "아연 도금 파이프 견적 문의",
+                    expertName: "김도금",
+                    date: "2023.10.15",
+                    status: "completed",
+                    budget: "500~1000만원",
+                    location: "서울시 강남구",
+                    contact: "user@example.com"
+                },
+                {
+                    id: 2,
+                    title: "공장 철골 구조물 도금 견적 요청",
+                    expertName: "이시공",
+                    date: "2023.10.10",
+                    status: "pending",
+                    budget: "1000만원 이상",
+                    location: "경기도 안산시",
+                    contact: "user@example.com"
+                }
+            ],
+            // 구매 문의 데이터 추가
+            purchaseHistory: [
+                {
+                    id: 1,
+                    productName: "고급 징크 도료 20L",
+                    quantity: 2,
+                    date: "2023.10.12",
+                    status: "completed",
+                    contact: "user@example.com"
+                },
+                {
+                    id: 2,
+                    productName: "프로페셔널 스프레이 건",
+                    quantity: 1,
+                    date: "2023.10.08",
+                    status: "pending",
+                    contact: "user@example.com"
+                }
+            ],
+            // 알림 데이터
+            notifications: [
+                {
+                    id: 1,
+                    title: "새 답변이 등록되었습니다",
+                    content: "아연 도금 파이프 견적 문의합니다 글에 새 답변이 등록되었습니다.",
+                    date: "2023.10.16",
+                    read: false,
+                    userId: 2
+                }
+            ]
+        };
+
+        // 애플리케이션 상태
+        const appState = {
+            isAdmin: false,
+            isLoggedIn: false,
+            currentUser: null,
+            editMode: false,
+            currentEditingExpertId: null,
+            currentEditingPostId: null,
+            data: JSON.parse(JSON.stringify(sampleData)) // 깊은 복사
+        };
+
+        $(document).ready(function() {
+            // 초기 데이터 렌더링
+            renderHomePage();
+            renderCommunityPage();
+            renderMarketPage();
+            renderQuotePage();
+            renderAdminPanel();
+
+            // 툴팁 초기화
+            $('[data-bs-toggle="tooltip"]').tooltip();
+            
+            // 페이지 전환
+            $('a[data-page]').click(function(e) {
+                e.preventDefault();
+                const targetPage = $(this).data('page');
+                
+                // 로딩 표시
+                $('#loadingIndicator').addClass('active');
+                
+                // 모든 페이지 숨기기
+                $('.page-content').removeClass('active');
+                
+                // 0.5초 후 대상 페이지 표시 (로딩 효과를 위한 지연)
+                setTimeout(function() {
+                    $(`#${targetPage}Page`).addClass('active');
+                    $('#loadingIndicator').removeClass('active');
+                    
+                    // 현재 활성 메뉴 업데이트
+                    $('.navbar-nav .nav-link').removeClass('active');
+                    $(`a[data-page="${targetPage}"]`).addClass('active');
+                    
+                    // 페이지 상단으로 스크롤
+                    window.scrollTo(0, 0);
+                    
+                    // 견적 요청 페이지일 경우 견적 기록 표시
+                    if (targetPage === 'quote' && appState.isLoggedIn) {
+                        renderQuoteHistory();
+                    }
+                }, 500);
+            });
+            
+            // 로그인 폼 처리
+            $('#loginForm').submit(function(e) {
+                e.preventDefault();
+                
+                const email = $('#loginEmail').val();
+                const password = $('#loginPassword').val();
+                
+                // 로그인 검증
+                const user = appState.data.users.find(u => u.email === email && u.password === password);
+                
+                if(user) {
+                    // 로그인 성공
+                    appState.isLoggedIn = true;
+                    appState.currentUser = user;
+                    appState.isAdmin = user.userType === 'admin';
+                    
+                    // UI 업데이트
+                    $('body').addClass('user-logged-in');
+                    if (appState.isAdmin) {
+                        $('body').addClass('admin-logged-in');
+                        $('#userName').text('관리자');
+                    } else {
+                        $('#userName').text(user.name);
+                    }
+                    
+                    // 알림 업데이트
+                    updateNotificationBadge();
+                    
+                    $('#loginModal').modal('hide');
+                    alert(`${user.name}님, 환영합니다!`);
+                    
+                    // 폼 초기화
+                    $('#loginForm')[0].reset();
+                    
+                    // 견적 기록 표시
+                    if ($('#quotePage').hasClass('active')) {
+                        renderQuoteHistory();
+                    }
+                } else {
+                    // 로그인 실패
+                    alert('이메일 또는 비밀번호가 올바르지 않습니다.');
+                }
+            });
+            
+            // 회원가입 폼 처리
+            $('#registerForm').submit(function(e) {
+                e.preventDefault();
+                
+                const name = $('#registerName').val();
+                const email = $('#registerEmail').val();
+                const password = $('#registerPassword').val();
+                const passwordConfirm = $('#registerPasswordConfirm').val();
+                const userType = $('#userType').val();
+                const agreeTerms = $('#agreeTerms').is(':checked');
+                
+                // 간단한 유효성 검사
+                if(!name || !email || !password || !passwordConfirm || !userType) {
+                    alert('모든 필수 항목을 입력해주세요.');
+                    return;
+                }
+                
+                if(password !== passwordConfirm) {
+                    alert('비밀번호가 일치하지 않습니다.');
+                    return;
+                }
+                
+                if(!agreeTerms) {
+                    alert('이용약관에 동의해주세요.');
+                    return;
+                }
+                
+                // 이메일 중복 확인
+                if(appState.data.users.find(u => u.email === email)) {
+                    alert('이미 사용 중인 이메일입니다.');
+                    return;
+                }
+                
+                // 새 사용자 추가
+                const newUser = {
+                    id: appState.data.users.length + 1,
+                    name: name,
+                    email: email,
+                    password: password,
+                    userType: userType,
+                    isExpert: userType === 'expert'
+                };
+                
+                appState.data.users.push(newUser);
+                
+                // 회원가입 성공
+                $('#registerModal').modal('hide');
+                alert('회원가입이 완료되었습니다. 로그인해주세요.');
+                
+                // 폼 초기화
+                $('#registerForm')[0].reset();
+                
+                // 관리자 패널 새로고침
+                renderAdminPanel();
+            });
+            
+            // 사용자 정보 수정 폼 처리
+            $('#userProfileForm').submit(function(e) {
+                e.preventDefault();
+                
+                const name = $('#profileName').val();
+                const currentPassword = $('#currentPassword').val();
+                const newPassword = $('#newPassword').val();
+                const confirmPassword = $('#confirmPassword').val();
+                
+                // 현재 비밀번호 확인
+                if(currentPassword && currentPassword !== appState.currentUser.password) {
+                    alert('현재 비밀번호가 올바르지 않습니다.');
+                    return;
+                }
+                
+                // 새 비밀번호 확인
+                if(newPassword && newPassword !== confirmPassword) {
+                    alert('새 비밀번호가 일치하지 않습니다.');
+                    return;
+                }
+                
+                // 사용자 정보 업데이트
+                appState.currentUser.name = name;
+                if(newPassword) {
+                    appState.currentUser.password = newPassword;
+                }
+                
+                // 데이터베이스 업데이트
+                const userIndex = appState.data.users.findIndex(u => u.id === appState.currentUser.id);
+                if(userIndex !== -1) {
+                    appState.data.users[userIndex] = appState.currentUser;
+                }
+                
+                // UI 업데이트
+                $('#userName').text(name);
+                
+                $('#userProfileModal').modal('hide');
+                alert('회원 정보가 수정되었습니다.');
+                
+                // 폼 초기화
+                $('#userProfileForm')[0].reset();
+            });
+            
+            // 로그아웃 처리
+            $('#logoutButton').click(function(e) {
+                e.preventDefault();
+                
+                appState.isLoggedIn = false;
+                appState.isAdmin = false;
+                appState.currentUser = null;
+                
+                // UI 업데이트
+                $('body').removeClass('user-logged-in admin-logged-in');
+                
+                alert('로그아웃되었습니다.');
+                
+                // 견적 기록 숨기기
+                if ($('#quotePage').hasClass('active')) {
+                    $('#quoteHistorySection').hide();
+                }
+            });
+            
+            // 관리자 패널 토글
+            $('#adminPanelToggle').click(function() {
+                $('#adminPanel').addClass('active');
+                $('#adminOverlay').addClass('active');
+            });
+            
+            $('#closeAdminPanel, #adminOverlay').click(function() {
+                $('#adminPanel').removeClass('active');
+                $('#adminOverlay').removeClass('active');
+            });
+            
+            // 빠른 관리자 로그인 (개발용)
+            $('#quickAdminLogin').click(function() {
+                $('#loginEmail').val('admin@znwork.com');
+                $('#loginPassword').val('admin123');
+                $('#loginModal').modal('show');
+            });
+            
+            // 전화 문의 배지 클릭
+            $('.call-badge').click(function() {
+                alert('전화 문의: 02-1234-5678');
+            });
+            
+            // 글쓰기 버튼 클릭
+            $('#writePostBtn').click(function() {
+                if (appState.isLoggedIn) {
+                    $('#writePostModal').modal('show');
+                } else {
+                    $('#loginModal').modal('show');
+                }
+            });
+            
+            // 글쓰기 폼 처리
+            $('#writePostForm').submit(function(e) {
+                e.preventDefault();
+                
+                const title = $('#postTitle').val();
+                const category = $('#postCategory').val();
+                const content = $('#postContent').val();
+                
+                const newPost = {
+                    id: appState.data.posts.length + 1,
+                    title: title,
+                    author: appState.currentUser.name,
+                    date: new Date().toISOString().split('T')[0].replace(/-/g, '.'),
+                    views: 0,
+                    comments: 0,
+                    content: content,
+                    category: category,
+                    commentsList: []
+                };
+                
+                // 새 글을 맨 앞에 추가
+                appState.data.posts.unshift(newPost);
+                
+                $('#writePostModal').modal('hide');
+                alert('글이 성공적으로 작성되었습니다.');
+                
+                // 폼 초기화
+                $('#writePostForm')[0].reset();
+                
+                // 커뮤니티 페이지 새로고침
+                renderCommunityPage();
+                renderHomePage();
+                renderAdminPanel();
+            });
+            
+            // 답변 작성 폼 처리
+            $('#commentForm').submit(function(e) {
+                e.preventDefault();
+                
+                const content = $('#commentContent').val();
+                const postId = appState.currentEditingPostId;
+                
+                const newComment = {
+                    id: Date.now(), // 간단한 ID 생성
+                    author: appState.currentUser.name,
+                    date: new Date().toISOString().split('T')[0].replace(/-/g, '.'),
+                    content: content
+                };
+                
+                // 해당 게시글 찾기
+                const post = appState.data.posts.find(p => p.id === postId);
+                if (post) {
+                    // 답변 추가
+                    post.commentsList.push(newComment);
+                    post.comments = post.commentsList.length;
+                    
+                    // 알림 생성 (글 작성자에게)
+                    if (post.author !== appState.currentUser.name) {
+                        const postAuthor = appState.data.users.find(u => u.name === post.author);
+                        if (postAuthor) {
+                            const newNotification = {
+                                id: appState.data.notifications.length + 1,
+                                title: "새 답변이 등록되었습니다",
+                                content: `${post.title} 글에 새 답변이 등록되었습니다.`,
+                                date: new Date().toISOString().split('T')[0].replace(/-/g, '.'),
+                                read: false,
+                                userId: postAuthor.id
+                            };
+                            appState.data.notifications.push(newNotification);
+                            
+                            // 알림 배지 업데이트
+                            updateNotificationBadge();
+                        }
+                    }
+                    
+                    $('#commentModal').modal('hide');
+                    alert('답변이 성공적으로 작성되었습니다.');
+                    
+                    // 폼 초기화
+                    $('#commentForm')[0].reset();
+                    
+                    // 커뮤니티 페이지 새로고침
+                    renderCommunityPage();
+                    renderAdminPanel();
+                }
+            });
+            
+            // 견적 요청 폼 제출
+            $('#quoteRequestForm').submit(function(e) {
+                e.preventDefault();
+                
+                if (appState.isLoggedIn) {
+                    const title = $('#quoteRequestTitle').val();
+                    const type = $('#quoteRequestType').val();
+                    const content = $('#quoteRequestContent').val();
+                    const budget = $('#quoteRequestBudget').val();
+                    const deadline = $('#quoteRequestDeadline').val();
+                    const location = $('#quoteRequestLocation').val();
+                    const contact = $('#quoteRequestContact').val();
+                    
+                    // 새 견적 요청 생성
+                    const newQuote = {
+                        id: appState.data.quotes.length + 1,
+                        title: title,
+                        author: appState.currentUser.name,
+                        date: new Date().toISOString().split('T')[0].replace(/-/g, '.'),
+                        location: location,
+                        budget: budget,
+                        deadline: deadline,
+                        content: content,
+                        status: "모집중",
+                        type: type,
+                        contact: contact
+                    };
+                    
+                    // 새 견적을 맨 앞에 추가
+                    appState.data.quotes.unshift(newQuote);
+                    
+                    alert('견적 요청이 접수되었습니다. 전문가들의 답변을 기다려주세요.');
+                    $(this)[0].reset();
+                    
+                    // 견적 요청 페이지 새로고침
+                    renderQuotePage();
+                    renderAdminPanel();
+                    
+                    // 견적 기록이 있다면 새로고침
+                    if (appState.isLoggedIn) {
+                        renderQuoteHistory();
+                    }
+                } else {
+                    $('#loginModal').modal('show');
+                }
+            });
+            
+            // 견적 문의 폼 처리
+            $('#quoteForm').submit(function(e) {
+                e.preventDefault();
+                
+                const title = $('#quoteTitle').val();
+                const content = $('#quoteContent').val();
+                const budget = $('#quoteBudget').val();
+                const deadline = $('#quoteDeadline').val();
+                const expertName = $('#expertName').val();
+                
+                // 견적 기록에 추가
+                const newQuoteHistory = {
+                    id: appState.data.quoteHistory.length + 1,
+                    title: title,
+                    expertName: expertName,
+                    date: new Date().toISOString().split('T')[0].replace(/-/g, '.'),
+                    status: "pending",
+                    budget: budget,
+                    location: appState.currentUser.location || "미지정",
+                    contact: appState.currentUser.email
+                };
+                
+                appState.data.quoteHistory.push(newQuoteHistory);
+                
+                alert('견적 문의가 성공적으로 전송되었습니다. 전문가로부터 연락을 기다려주세요.');
+                
+                $('#quoteModal').modal('hide');
+                $('#quoteForm')[0].reset();
+                
+                // 견적 기록 새로고침
+                if ($('#quotePage').hasClass('active')) {
+                    renderQuoteHistory();
+                }
+                
+                // 내 정보 모달의 견적 문의 내역 새로고침
+                renderUserQuoteHistory();
+            });
+            
+            // 구매 문의 폼 처리
+            $('#purchaseForm').submit(function(e) {
+                e.preventDefault();
+                
+                const productName = $('#productName').val();
+                const quantity = $('#purchaseQuantity').val();
+                const content = $('#purchaseContent').val();
+                const contact = $('#purchaseContact').val();
+                
+                // 구매 문의 기록에 추가
+                const newPurchaseHistory = {
+                    id: appState.data.purchaseHistory.length + 1,
+                    productName: productName,
+                    quantity: quantity,
+                    date: new Date().toISOString().split('T')[0].replace(/-/g, '.'),
+                    status: "pending",
+                    contact: appState.currentUser.email,
+                    content: content
+                };
+                
+                appState.data.purchaseHistory.push(newPurchaseHistory);
+                
+                // 해당 상품의 구매 문의 수 증가
+                const marketItem = appState.data.marketItems.find(item => item.name === productName);
+                if (marketItem) {
+                    marketItem.purchaseInquiries = (marketItem.purchaseInquiries || 0) + 1;
+                }
+                
+                alert('구매 문의가 성공적으로 전송되었습니다. 판매자로부터 연락을 기다려주세요.');
+                
+                $('#purchaseModal').modal('hide');
+                $('#purchaseForm')[0].reset();
+                
+                // 관리자 패널 새로고침
+                renderAdminPanel();
+                
+                // 내 정보 모달의 구매 문의 내역 새로고침
+                renderUserPurchaseHistory();
+            });
+            
+            // 이미지 업로드 폼 처리
+            $('#imageUploadForm').submit(function(e) {
+                e.preventDefault();
+                
+                const imageUrl = $('#imageUrl').val();
+                const imageFile = $('#imageFile')[0].files[0];
+                
+                if (imageUrl) {
+                    // URL 사용
+                    updateExpertImage(appState.currentEditingExpertId, imageUrl);
+                } else if (imageFile) {
+                    // 파일 업로드 (실제 구현에서는 서버로 업로드해야 함)
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        updateExpertImage(appState.currentEditingExpertId, e.target.result);
+                    };
+                    reader.readAsDataURL(imageFile);
+                } else {
+                    alert('이미지 URL을 입력하거나 파일을 선택해주세요.');
+                    return;
+                }
+                
+                $('#imageUploadModal').modal('hide');
+                $('#imageUploadForm')[0].reset();
+                $('#imagePreviewContainer').hide();
+            });
+            
+            // 이미지 URL 미리보기
+            $('#imageUrl').on('input', function() {
+                const url = $(this).val();
+                if (url) {
+                    $('#imagePreview').attr('src', url);
+                    $('#imagePreviewContainer').show();
+                } else {
+                    $('#imagePreviewContainer').hide();
+                }
+            });
+            
+            // 관리자 기능 - 전문가 추가
+            $('#addExpertBtn').click(function() {
+                const newExpert = {
+                    id: appState.data.experts.length + 1,
+                    name: "새 전문가",
+                    specialty: "전문 분야",
+                    experience: "경력",
+                    location: "지역",
+                    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    description: "설명을 입력하세요",
+                    phone: "전화번호를 입력하세요",
+                    userId: null
+                };
+                
+                appState.data.experts.push(newExpert);
+                renderAdminPanel();
+                renderHomePage();
+                alert('새 전문가가 추가되었습니다. 관리자 패널에서 수정하세요.');
+            });
+            
+            // 관리자 기능 - 게시글 추가
+            $('#addPostBtn').click(function() {
+                const newPost = {
+                    id: appState.data.posts.length + 1,
+                    title: "새 게시글",
+                    author: "작성자",
+                    date: new Date().toISOString().split('T')[0].replace(/-/g, '.'),
+                    views: 0,
+                    comments: 0,
+                    content: "내용을 입력하세요",
+                    category: "정보",
+                    commentsList: []
+                };
+                
+                // 새 글을 맨 앞에 추가
+                appState.data.posts.unshift(newPost);
+                renderAdminPanel();
+                renderCommunityPage();
+                renderHomePage();
+                alert('새 게시글이 추가되었습니다. 관리자 패널에서 수정하세요.');
+            });
+            
+            // 관리자 기능 - 마켓 아이템 추가
+            $('#addMarketItemBtn').click(function() {
+                const newItem = {
+                    id: appState.data.marketItems.length + 1,
+                    name: "새 상품",
+                    description: "상품 설명을 입력하세요",
+                    price: "₩0",
+                    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
+                    category: "징크 도료",
+                    purchaseInquiries: 0
+                };
+                
+                appState.data.marketItems.push(newItem);
+                renderAdminPanel();
+                renderMarketPage();
+                alert('새 상품이 추가되었습니다. 관리자 패널에서 수정하세요.');
+            });
+            
+            // 관리자 기능 - 견적 요청 추가
+            $('#addQuoteBtn').click(function() {
+                const newQuote = {
+                    id: appState.data.quotes.length + 1,
+                    title: "새 견적 요청",
+                    author: "요청자",
+                    date: new Date().toISOString().split('T')[0].replace(/-/g, '.'),
+                    location: "지역",
+                    budget: "예산 범위",
+                    deadline: "마감일",
+                    content: "상세 내용을 입력하세요",
+                    status: "모집중",
+                    type: "아연 도금",
+                    contact: "연락처"
+                };
+                
+                // 새 견적을 맨 앞에 추가
+                appState.data.quotes.unshift(newQuote);
+                renderAdminPanel();
+                renderQuotePage();
+                alert('새 견적 요청이 추가되었습니다. 관리자 패널에서 수정하세요.');
+            });
+            
+            // 관리자 기능 - 회원 추가
+            $('#addUserBtn').click(function() {
+                const newUser = {
+                    id: appState.data.users.length + 1,
+                    name: "새 회원",
+                    email: "newuser@example.com",
+                    password: "password123",
+                    userType: "general",
+                    isExpert: false
+                };
+                
+                appState.data.users.push(newUser);
+                renderAdminPanel();
+                alert('새 회원이 추가되었습니다. 관리자 패널에서 수정하세요.');
+            });
+            
+            // 관리자 기능 - 사이트 설정 저장
+            $('#saveSiteSettings').click(function() {
+                const siteTitle = $('#siteTitle').val();
+                const siteContact = $('#siteContact').val();
+                const heroImageUrl = $('#heroImageUrl').val();
+                
+                $('.hero-title').text(siteTitle);
+                $('#heroSection').css('background-image', `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${heroImageUrl}')`);
+                alert('사이트 설정이 저장되었습니다.');
+            });
+            
+            // 관리자 기능 - 접근성 설정 저장
+            $('#saveAccessSettings').click(function() {
+                alert('접근성 설정이 저장되었습니다.');
+            });
+            
+            // 사용자 정보 모달 열릴 때 데이터 채우기
+            $('#userProfileModal').on('show.bs.modal', function() {
+                if(appState.currentUser) {
+                    $('#profileName').val(appState.currentUser.name);
+                    $('#profileEmail').val(appState.currentUser.email);
+                    $('#profileUserType').val(
+                        appState.currentUser.userType === 'admin' ? '관리자' : 
+                        appState.currentUser.userType === 'expert' ? '전문가' : '일반 회원'
+                    );
+                    
+                    // 사용자 활동 내역 렌더링
+                    renderUserQuoteHistory();
+                    renderUserPurchaseHistory();
+                }
+            });
+            
+            // 알림 아이콘 클릭
+            $('#notificationIcon').click(function(e) {
+                e.preventDefault();
+                showNotifications();
+            });
+        });
+
+        // 알림 배지 업데이트 함수
+        function updateNotificationBadge() {
+            if (appState.isLoggedIn) {
+                const userNotifications = appState.data.notifications.filter(
+                    notification => notification.userId === appState.currentUser.id && !notification.read
+                );
+                
+                const notificationCount = userNotifications.length;
+                const notificationBadge = $('#notificationCount');
+                
+                if (notificationCount > 0) {
+                    notificationBadge.text(notificationCount).show();
+                } else {
+                    notificationBadge.hide();
+                }
+            }
+        }
+
+        // 알림 표시 함수
+        function showNotifications() {
+            if (appState.isLoggedIn) {
+                const userNotifications = appState.data.notifications.filter(
+                    notification => notification.userId === appState.currentUser.id
+                );
+                
+                if (userNotifications.length === 0) {
+                    alert('새로운 알림이 없습니다.');
+                    return;
+                }
+                
+                let notificationText = "알림 목록:\n\n";
+                userNotifications.forEach(notification => {
+                    notificationText += `• ${notification.title}\n`;
+                    notificationText += `  ${notification.content}\n`;
+                    notificationText += `  ${notification.date}\n\n`;
+                    
+                    // 알림 읽음 처리
+                    notification.read = true;
+                });
+                
+                alert(notificationText);
+                
+                // 알림 배지 업데이트
+                updateNotificationBadge();
+            }
+        }
+
+        // 사용자 견적 문의 내역 렌더링 함수
+        function renderUserQuoteHistory() {
+            const userQuoteHistoryContainer = $('#userQuoteHistoryContainer');
+            userQuoteHistoryContainer.empty();
+            
+            // 현재 사용자의 견적 문의 내역만 필터링
+            const userQuoteHistory = appState.data.quoteHistory.filter(
+                history => history.contact === appState.currentUser.email
+            );
+            
+            if (userQuoteHistory.length === 0) {
+                userQuoteHistoryContainer.html('<p class="text-muted">견적 문의 내역이 없습니다.</p>');
+                return;
+            }
+            
+            userQuoteHistory.forEach(history => {
+                let statusClass = '';
+                let statusText = '';
+                
+                switch(history.status) {
+                    case 'pending':
+                        statusClass = 'quote-status-pending';
+                        statusText = '대기중';
+                        break;
+                    case 'completed':
+                        statusClass = 'quote-status-completed';
+                        statusText = '완료';
+                        break;
+                    case 'rejected':
+                        statusClass = 'quote-status-rejected';
+                        statusText = '거절';
+                        break;
+                }
+                
+                const historyItem = `
+                    <div class="user-activity-item">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <h6>${history.title}</h6>
+                            <span class="quote-status ${statusClass}">${statusText}</span>
+                        </div>
+                        <p class="text-muted mb-2">${history.expertName} 전문가 · ${history.date}</p>
+                        <div class="d-flex justify-content-between">
+                            <span class="text-muted">예산: ${history.budget}</span>
+                            <span class="text-muted">지역: ${history.location}</span>
+                        </div>
+                    </div>
+                `;
+                userQuoteHistoryContainer.append(historyItem);
+            });
+        }
+
+        // 사용자 구매 문의 내역 렌더링 함수
+        function renderUserPurchaseHistory() {
+            const userPurchaseHistoryContainer = $('#userPurchaseHistoryContainer');
+            userPurchaseHistoryContainer.empty();
+            
+            // 현재 사용자의 구매 문의 내역만 필터링
+            const userPurchaseHistory = appState.data.purchaseHistory.filter(
+                history => history.contact === appState.currentUser.email
+            );
+            
+            if (userPurchaseHistory.length === 0) {
+                userPurchaseHistoryContainer.html('<p class="text-muted">구매 문의 내역이 없습니다.</p>');
+                return;
+            }
+            
+            userPurchaseHistory.forEach(history => {
+                let statusClass = '';
+                let statusText = '';
+                
+                switch(history.status) {
+                    case 'pending':
+                        statusClass = 'quote-status-pending';
+                        statusText = '대기중';
+                        break;
+                    case 'completed':
+                        statusClass = 'quote-status-completed';
+                        statusText = '완료';
+                        break;
+                    case 'rejected':
+                        statusClass = 'quote-status-rejected';
+                        statusText = '거절';
+                        break;
+                }
+                
+                const historyItem = `
+                    <div class="user-activity-item">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <h6>${history.productName}</h6>
+                            <span class="quote-status ${statusClass}">${statusText}</span>
+                        </div>
+                        <p class="text-muted mb-2">수량: ${history.quantity}개 · ${history.date}</p>
+                        ${history.content ? `<p class="mb-2">${history.content}</p>` : ''}
+                    </div>
+                `;
+                userPurchaseHistoryContainer.append(historyItem);
+            });
+        }
+
+        // 홈페이지 렌더링 함수
+        function renderHomePage() {
+            // 전문가 섹션 렌더링
+            const expertsContainer = $('#expertsContainer');
+            expertsContainer.empty();
+            
+            appState.data.experts.forEach(expert => {
+                const expertCard = `
+                    <div class="col-md-4 mb-4">
+                        <div class="card expert-card">
+                            <div class="image-upload-container">
+                                <img src="${expert.image}" alt="${expert.name} 전문가" class="expert-img">
+                                ${appState.isAdmin ? `
+                                <button class="image-upload-btn" data-id="${expert.id}">
+                                    <i class="fas fa-camera"></i>
+                                </button>
+                                ` : ''}
+                            </div>
+                            <h5 class="editable">${expert.name}</h5>
+                            <p class="text-muted editable">${expert.specialty}</p>
+                            <p class="small editable">${expert.experience}</p>
+                            <p class="editable">${expert.location}</p>
+                            <!-- 전화번호 추가 -->
+                            <p class="expert-phone editable">${expert.phone || '전화번호 미등록'}</p>
+                            <div class="expert-actions">
+                                <button class="btn btn-sm btn-outline-primary">프로필 보기</button>
+                                <button class="btn btn-sm btn-zinc quote-expert-btn" data-id="${expert.id}" data-name="${expert.name}">견적 문의</button>
+                            </div>
+                            ${appState.isAdmin ? `
+                            <div class="admin-actions">
+                                <button class="btn btn-sm btn-warning edit-expert" data-id="${expert.id}">수정</button>
+                                <button class="btn btn-sm btn-danger delete-expert" data-id="${expert.id}">삭제</button>
+                            </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+                expertsContainer.append(expertCard);
+            });
+            
+            // 인기글 섹션 렌더링
+            const popularPostsContainer = $('#popularPostsContainer');
+            popularPostsContainer.empty();
+            
+            // 상위 3개 게시글만 표시
+            const popularPosts = appState.data.posts.slice(0, 3);
+            
+            popularPosts.forEach(post => {
+                const postCard = `
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <span class="badge bg-primary mb-2">${post.category}</span>
+                                <h5 class="card-title editable">${post.title}</h5>
+                                <p class="card-text">${post.content.substring(0, 100)}...</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <small class="text-muted">${post.author}</small>
+                                    <small class="text-muted"><i class="fas fa-eye me-1"></i> ${post.views} <i class="fas fa-comment ms-2 me-1"></i> ${post.comments}</small>
+                                </div>
+                                ${appState.isAdmin ? `
+                                <div class="admin-actions">
+                                    <button class="btn btn-sm btn-warning edit-post" data-id="${post.id}">수정</button>
+                                    <button class="btn btn-sm btn-danger delete-post" data-id="${post.id}">삭제</button>
+                                </div>
+                                ` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                popularPostsContainer.append(postCard);
+            });
+            
+            // 관리자 기능 이벤트 바인딩
+            if (appState.isAdmin) {
+                $('.edit-expert').click(function() {
+                    const expertId = $(this).data('id');
+                    editExpert(expertId);
+                });
+                
+                $('.delete-expert').click(function() {
+                    const expertId = $(this).data('id');
+                    deleteExpert(expertId);
+                });
+                
+                $('.edit-post').click(function() {
+                    const postId = $(this).data('id');
+                    editPost(postId);
+                });
+                
+                $('.delete-post').click(function() {
+                    const postId = $(this).data('id');
+                    deletePost(postId);
+                });
+                
+                $('.image-upload-btn').click(function() {
+                    const expertId = $(this).data('id');
+                    appState.currentEditingExpertId = expertId;
+                    $('#imageUploadModal').modal('show');
+                });
+            }
+            
+            // 견적 문의 버튼 이벤트 바인딩
+            $('.quote-expert-btn').click(function() {
+                if (appState.isLoggedIn) {
+                    const expertId = $(this).data('id');
+                    const expertName = $(this).data('name');
+                    $('#expertName').val(expertName);
+                    $('#quoteModal').modal('show');
+                } else {
+                    $('#loginModal').modal('show');
+                }
+            });
+        }
+
+        // 커뮤니티 페이지 렌더링 함수
+        function renderCommunityPage() {
+            const communityPostsList = $('#communityPostsList');
+            communityPostsList.empty();
+            
+            appState.data.posts.forEach(post => {
+                const postItem = `
+                    <li class="post-item">
+                        <div class="post-title editable">${post.title}</div>
+                        <div class="post-meta">
+                            <span><i class="fas fa-user me-1"></i> ${post.author}</span>
+                            <span><i class="fas fa-clock me-1"></i> ${post.date}</span>
+                            <span><i class="fas fa-eye me-1"></i> ${post.views}</span>
+                            <span><i class="fas fa-comment me-1"></i> ${post.comments}</span>
+                        </div>
+                        <div class="post-content">${post.content}</div>
+                        
+                        <!-- 답변 섹션 -->
+                        <div class="comments-section">
+                            <h6>답변 (${post.commentsList.length})</h6>
+                            ${post.commentsList.length > 0 ? `
+                                ${post.commentsList.map(comment => `
+                                    <div class="comment-item">
+                                        <div class="comment-meta">
+                                            <span>${comment.author}</span>
+                                            <span>${comment.date}</span>
+                                        </div>
+                                        <div class="comment-content">${comment.content}</div>
+                                    </div>
+                                `).join('')}
+                            ` : '<p class="text-muted">아직 답변이 없습니다.</p>'}
+                            
+                            ${appState.isLoggedIn ? `
+                            <div class="comment-form">
+                                <button class="btn btn-sm btn-zinc add-comment-btn" data-id="${post.id}">
+                                    <i class="fas fa-reply me-1"></i> 답변 작성
+                                </button>
+                            </div>
+                            ` : ''}
+                        </div>
+                        
+                        <div class="post-actions">
+                            <button class="btn btn-sm btn-outline-primary view-post-btn" data-id="${post.id}">상세 보기</button>
+                            <button class="btn btn-sm btn-outline-secondary">공유</button>
+                        </div>
+                        ${appState.isAdmin ? `
+                        <div class="admin-actions">
+                            <button class="btn btn-sm btn-warning edit-post" data-id="${post.id}">수정</button>
+                            <button class="btn btn-sm btn-danger delete-post" data-id="${post.id}">삭제</button>
+                        </div>
+                        ` : ''}
+                    </li>
+                `;
+                communityPostsList.append(postItem);
+            });
+            
+            // 관리자 기능 이벤트 바인딩
+            if (appState.isAdmin) {
+                $('.edit-post').click(function() {
+                    const postId = $(this).data('id');
+                    editPost(postId);
+                });
+                
+                $('.delete-post').click(function() {
+                    const postId = $(this).data('id');
+                    deletePost(postId);
+                });
+            }
+            
+            // 답변 작성 버튼 이벤트 바인딩
+            $('.add-comment-btn').click(function() {
+                const postId = $(this).data('id');
+                appState.currentEditingPostId = postId;
+                $('#commentModal').modal('show');
+            });
+        }
+
+        // 자재 마켓 페이지 렌더링 함수
+        function renderMarketPage() {
+            const marketItemsContainer = $('#marketItemsContainer');
+            marketItemsContainer.empty();
+            
+            appState.data.marketItems.forEach(item => {
+                const marketItem = `
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 market-item">
+                            <img src="${item.image}" class="card-img-top" alt="${item.name}">
+                            <div class="card-body">
+                                <h5 class="card-title editable">${item.name}</h5>
+                                <p class="card-text">${item.description}</p>
+                                <p class="market-price editable">${item.price}</p>
+                                <p class="small text-muted">구매 문의: ${item.purchaseInquiries || 0}건</p>
+                            </div>
+                            <div class="card-footer bg-white">
+                                <button class="btn btn-zinc w-100 purchase-btn" data-id="${item.id}" data-name="${item.name}">구매 문의</button>
+                            </div>
+                            ${appState.isAdmin ? `
+                            <div class="admin-actions">
+                                <button class="btn btn-sm btn-warning edit-market-item" data-id="${item.id}">수정</button>
+                                <button class="btn btn-sm btn-danger delete-market-item" data-id="${item.id}">삭제</button>
+                            </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+                marketItemsContainer.append(marketItem);
+            });
+            
+            // 관리자 기능 이벤트 바인딩
+            if (appState.isAdmin) {
+                $('.edit-market-item').click(function() {
+                    const itemId = $(this).data('id');
+                    editMarketItem(itemId);
+                });
+                
+                $('.delete-market-item').click(function() {
+                    const itemId = $(this).data('id');
+                    deleteMarketItem(itemId);
+                });
+            }
+            
+            // 구매 문의 버튼 이벤트 바인딩
+            $('.purchase-btn').click(function() {
+                if (appState.isLoggedIn) {
+                    const itemId = $(this).data('id');
+                    const itemName = $(this).data('name');
+                    $('#productName').val(itemName);
+                    $('#purchaseModal').modal('show');
+                } else {
+                    $('#loginModal').modal('show');
+                }
+            });
+        }
+
+        // 견적 요청 페이지 렌더링 함수
+        function renderQuotePage() {
+            const recentQuotesContainer = $('#recentQuotesContainer');
+            recentQuotesContainer.empty();
+            
+            appState.data.quotes.forEach(quote => {
+                const quoteItem = `
+                    <div class="card mb-3 quote-item" data-id="${quote.id}">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <h5 class="editable">${quote.title}</h5>
+                                <span class="badge bg-primary">${quote.status}</span>
+                            </div>
+                            <p class="text-muted mb-2">${quote.author} · ${quote.date} · ${quote.location}</p>
+                            <p class="mb-3">${quote.content}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="text-muted">작업종류: ${quote.type}</span>
+                                <span class="text-muted">예산: ${quote.budget}</span>
+                                <span class="text-muted">마감: ${quote.deadline}</span>
+                            </div>
+                            ${appState.isAdmin ? `
+                            <div class="admin-actions">
+                                <button class="btn btn-sm btn-warning edit-quote" data-id="${quote.id}">수정</button>
+                                <button class="btn btn-sm btn-danger delete-quote" data-id="${quote.id}">삭제</button>
+                            </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+                recentQuotesContainer.append(quoteItem);
+            });
+            
+            // 관리자 기능 이벤트 바인딩
+            if (appState.isAdmin) {
+                $('.edit-quote').click(function() {
+                    const quoteId = $(this).data('id');
+                    editQuote(quoteId);
+                });
+                
+                $('.delete-quote').click(function() {
+                    const quoteId = $(this).data('id');
+                    deleteQuote(quoteId);
+                });
+            }
+            
+            // 견적 요청 상세보기 이벤트 바인딩
+            $('.quote-item').click(function() {
+                const quoteId = $(this).data('id');
+                showQuoteDetail(quoteId);
+            });
+            
+            // 로그인 상태에 따라 견적 기록 섹션 표시/숨김
+            if (appState.isLoggedIn) {
+                $('#quoteHistorySection').show();
+                renderQuoteHistory();
+            } else {
+                $('#quoteHistorySection').hide();
+            }
+        }
+
+        // 견적 기록 렌더링 함수
+        function renderQuoteHistory() {
+            const quoteHistoryContainer = $('#quoteHistoryContainer');
+            quoteHistoryContainer.empty();
+            
+            // 현재 사용자의 견적 기록만 필터링
+            const userQuoteHistory = appState.data.quoteHistory.filter(
+                history => history.contact === appState.currentUser.email
+            );
+            
+            if (userQuoteHistory.length === 0) {
+                quoteHistoryContainer.html('<p class="text-muted">아직 견적 기록이 없습니다.</p>');
+                return;
+            }
+            
+            userQuoteHistory.forEach(history => {
+                let statusClass = '';
+                let statusText = '';
+                
+                switch(history.status) {
+                    case 'pending':
+                        statusClass = 'quote-status-pending';
+                        statusText = '대기중';
+                        break;
+                    case 'completed':
+                        statusClass = 'quote-status-completed';
+                        statusText = '완료';
+                        break;
+                    case 'rejected':
+                        statusClass = 'quote-status-rejected';
+                        statusText = '거절';
+                        break;
+                }
+                
+                const historyItem = `
+                    <div class="quote-history-item">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <h6>${history.title}</h6>
+                            <span class="quote-status ${statusClass}">${statusText}</span>
+                        </div>
+                        <p class="text-muted mb-2">${history.expertName} 전문가 · ${history.date}</p>
+                        <div class="d-flex justify-content-between">
+                            <span class="text-muted">예산: ${history.budget}</span>
+                            <span class="text-muted">지역: ${history.location}</span>
+                        </div>
+                    </div>
+                `;
+                quoteHistoryContainer.append(historyItem);
+            });
+        }
+
+        // 견적 상세보기 함수
+        function showQuoteDetail(id) {
+            const quote = appState.data.quotes.find(q => q.id === id);
+            if (quote) {
+                $('#detailTitle').text(quote.title);
+                $('#detailAuthor').text(quote.author);
+                $('#detailType').text(quote.type);
+                $('#detailContent').text(quote.content);
+                $('#detailBudget').text(quote.budget);
+                $('#detailDeadline').text(quote.deadline);
+                $('#detailLocation').text(quote.location);
+                $('#detailContact').text(quote.contact);
+                $('#detailStatus').text(quote.status);
+                
+                $('#quoteDetailModal').modal('show');
+            }
+        }
+
+        // 관리자 패널 렌더링 함수
+        function renderAdminPanel() {
+            // 회원 테이블 렌더링
+            const usersTableBody = $('#usersTableBody');
+            usersTableBody.empty();
+            
+            appState.data.users.forEach(user => {
+                // 회원이 전문가인지 확인
+                const isExpert = appState.data.experts.some(expert => expert.userId === user.id);
+                
+                const userRow = `
+                    <tr>
+                        <td><input type="text" value="${user.name}" class="form-control form-control-sm" data-id="${user.id}" data-field="name"></td>
+                        <td><input type="email" value="${user.email}" class="form-control form-control-sm" data-id="${user.id}" data-field="email"></td>
+                        <td>
+                            <select class="form-select form-select-sm" data-id="${user.id}" data-field="userType">
+                                <option value="general" ${user.userType === 'general' ? 'selected' : ''}>일반 회원</option>
+                                <option value="expert" ${user.userType === 'expert' ? 'selected' : ''}>전문가</option>
+                                <option value="company" ${user.userType === 'company' ? 'selected' : ''}>업체</option>
+                                <option value="admin" ${user.userType === 'admin' ? 'selected' : ''}>관리자</option>
+                            </select>
+                        </td>
+                        <td>
+                            <div class="expert-checkbox">
+                                <input type="checkbox" class="form-check-input" data-id="${user.id}" id="expertCheckbox${user.id}" ${isExpert ? 'checked' : ''}>
+                                <label class="form-check-label" for="expertCheckbox${user.id}">전문가 등록</label>
+                            </div>
+                        </td>
+                        <td class="actions">
+                            <button class="btn btn-sm btn-warning save-user" data-id="${user.id}">저장</button>
+                            <button class="btn btn-sm btn-danger delete-user" data-id="${user.id}">삭제</button>
+                        </td>
+                    </tr>
+                `;
+                usersTableBody.append(userRow);
+            });
+            
+            // 전문가 테이블 렌더링
+            const expertsTableBody = $('#expertsTableBody');
+            expertsTableBody.empty();
+            
+            appState.data.experts.forEach(expert => {
+                const expertRow = `
+                    <tr>
+                        <td><input type="text" value="${expert.name}" class="form-control form-control-sm" data-id="${expert.id}" data-field="name"></td>
+                        <td><input type="text" value="${expert.specialty}" class="form-control form-control-sm" data-id="${expert.id}" data-field="specialty"></td>
+                        <td><input type="text" value="${expert.experience}" class="form-control form-control-sm" data-id="${expert.id}" data-field="experience"></td>
+                        <td><input type="text" value="${expert.location}" class="form-control form-control-sm" data-id="${expert.id}" data-field="location"></td>
+                        <td><input type="text" value="${expert.phone || ''}" class="form-control form-control-sm" data-id="${expert.id}" data-field="phone" placeholder="전화번호 입력"></td>
+                        <td><input type="text" value="${expert.image}" class="form-control form-control-sm" data-id="${expert.id}" data-field="image" placeholder="이미지 URL"></td>
+                        <td class="actions">
+                            <button class="btn btn-sm btn-warning save-expert" data-id="${expert.id}">저장</button>
+                            <button class="btn btn-sm btn-danger delete-expert" data-id="${expert.id}">삭제</button>
+                        </td>
+                    </tr>
+                `;
+                expertsTableBody.append(expertRow);
+            });
+            
+            // 게시글 테이블 렌더링
+            const postsTableBody = $('#postsTableBody');
+            postsTableBody.empty();
+            
+            appState.data.posts.forEach(post => {
+                const postRow = `
+                    <tr>
+                        <td><input type="text" value="${post.title}" class="form-control form-control-sm" data-id="${post.id}" data-field="title"></td>
+                        <td><input type="text" value="${post.author}" class="form-control form-control-sm" data-id="${post.id}" data-field="author"></td>
+                        <td>
+                            <select class="form-select form-select-sm" data-id="${post.id}" data-field="category">
+                                <option value="견적요청" ${post.category === '견적요청' ? 'selected' : ''}>견적요청</option>
+                                <option value="정보" ${post.category === '정보' ? 'selected' : ''}>정보</option>
+                                <option value="질문" ${post.category === '질문' ? 'selected' : ''}>질문</option>
+                                <option value="후기" ${post.category === '후기' ? 'selected' : ''}>후기</option>
+                            </select>
+                        </td>
+                        <td>${post.commentsList ? post.commentsList.length : 0}</td>
+                        <td class="actions">
+                            <button class="btn btn-sm btn-warning save-post" data-id="${post.id}">저장</button>
+                            <button class="btn btn-sm btn-danger delete-post" data-id="${post.id}">삭제</button>
+                        </td>
+                    </tr>
+                `;
+                postsTableBody.append(postRow);
+            });
+            
+            // 마켓 아이템 테이블 렌더링
+            const marketItemsTableBody = $('#marketItemsTableBody');
+            marketItemsTableBody.empty();
+            
+            appState.data.marketItems.forEach(item => {
+                const marketItemRow = `
+                    <tr>
+                        <td><input type="text" value="${item.name}" class="form-control form-control-sm" data-id="${item.id}" data-field="name"></td>
+                        <td><input type="text" value="${item.price}" class="form-control form-control-sm" data-id="${item.id}" data-field="price"></td>
+                        <td>
+                            <select class="form-select form-select-sm" data-id="${item.id}" data-field="category">
+                                <option value="징크 도료" ${item.category === '징크 도료' ? 'selected' : ''}>징크 도료</option>
+                                <option value="마감 도구" ${item.category === '마감 도구' ? 'selected' : ''}>마감 도구</option>
+                                <option value="보조 자재" ${item.category === '보조 자재' ? 'selected' : ''}>보조 자재</option>
+                                <option value="안전 장비" ${item.category === '안전 장비' ? 'selected' : ''}>안전 장비</option>
+                            </select>
+                        </td>
+                        <td>${item.purchaseInquiries || 0}</td>
+                        <td class="actions">
+                            <button class="btn btn-sm btn-warning save-market-item" data-id="${item.id}">저장</button>
+                            <button class="btn btn-sm btn-danger delete-market-item" data-id="${item.id}">삭제</button>
+                        </td>
+                    </tr>
+                `;
+                marketItemsTableBody.append(marketItemRow);
+            });
+            
+            // 견적 요청 테이블 렌더링
+            const quotesTableBody = $('#quotesTableBody');
+            quotesTableBody.empty();
+            
+            appState.data.quotes.forEach(quote => {
+                const quoteRow = `
+                    <tr>
+                        <td><textarea class="form-control form-control-sm" data-id="${quote.id}" data-field="title" rows="2">${quote.title}</textarea></td>
+                        <td><input type="text" value="${quote.author}" class="form-control form-control-sm" data-id="${quote.id}" data-field="author"></td>
+                        <td><input type="text" value="${quote.location}" class="form-control form-control-sm" data-id="${quote.id}" data-field="location"></td>
+                        <td>
+                            <select class="form-select form-select-sm" data-id="${quote.id}" data-field="status">
+                                <option value="모집중" ${quote.status === '모집중' ? 'selected' : ''}>모집중</option>
+                                <option value="완료" ${quote.status === '완료' ? 'selected' : ''}>완료</option>
+                            </select>
+                        </td>
+                        <td class="actions">
+                            <button class="btn btn-sm btn-warning save-quote" data-id="${quote.id}">저장</button>
+                            <button class="btn btn-sm btn-danger delete-quote" data-id="${quote.id}">삭제</button>
+                        </td>
+                    </tr>
+                `;
+                quotesTableBody.append(quoteRow);
+            });
+            
+            // 관리자 기능 이벤트 바인딩
+            $('.save-user').click(function() {
+                const userId = $(this).data('id');
+                saveUser(userId);
+            });
+            
+            $('.delete-user').click(function() {
+                const userId = $(this).data('id');
+                deleteUser(userId);
+            });
+            
+            $('.save-expert').click(function() {
+                const expertId = $(this).data('id');
+                saveExpert(expertId);
+            });
+            
+            $('.delete-expert').click(function() {
+                const expertId = $(this).data('id');
+                deleteExpert(expertId);
+            });
+            
+            $('.save-post').click(function() {
+                const postId = $(this).data('id');
+                savePost(postId);
+            });
+            
+            $('.delete-post').click(function() {
+                const postId = $(this).data('id');
+                deletePost(postId);
+            });
+            
+            $('.save-market-item').click(function() {
+                const itemId = $(this).data('id');
+                saveMarketItem(itemId);
+            });
+            
+            $('.delete-market-item').click(function() {
+                const itemId = $(this).data('id');
+                deleteMarketItem(itemId);
+            });
+            
+            $('.save-quote').click(function() {
+                const quoteId = $(this).data('id');
+                saveQuote(quoteId);
+            });
+            
+            $('.delete-quote').click(function() {
+                const quoteId = $(this).data('id');
+                deleteQuote(quoteId);
+            });
+            
+            // 전문가 체크박스 이벤트 바인딩
+            $('.expert-checkbox input').change(function() {
+                const userId = $(this).data('id');
+                const isChecked = $(this).is(':checked');
+                toggleUserAsExpert(userId, isChecked);
+            });
+        }
+
+        // 회원 저장 함수
+        function saveUser(id) {
+            const user = appState.data.users.find(u => u.id === id);
+            if (user) {
+                user.name = $(`input[data-id="${id}"][data-field="name"]`).val();
+                user.email = $(`input[data-id="${id}"][data-field="email"]`).val();
+                user.userType = $(`select[data-id="${id}"][data-field="userType"]`).val();
+                
+                renderAdminPanel();
+                alert('회원 정보가 저장되었습니다.');
+            }
+        }
+
+        // 회원-전문가 연동 함수
+        function toggleUserAsExpert(userId, isExpert) {
+            const user = appState.data.users.find(u => u.id === userId);
+            if (!user) return;
+            
+            if (isExpert) {
+                // 회원을 전문가로 등록
+                const existingExpert = appState.data.experts.find(e => e.userId === userId);
+                if (!existingExpert) {
+                    const newExpert = {
+                        id: appState.data.experts.length + 1,
+                        name: user.name,
+                        specialty: "전문 분야",
+                        experience: "경력",
+                        location: "지역",
+                        image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                        description: "설명을 입력하세요",
+                        phone: "전화번호를 입력하세요",
+                        userId: userId
+                    };
+                    
+                    appState.data.experts.push(newExpert);
+                    user.isExpert = true;
+                    
+                    renderAdminPanel();
+                    renderHomePage();
+                    alert(`${user.name} 회원이 전문가로 등록되었습니다.`);
+                }
+            } else {
+                // 회원을 전문가에서 제외
+                const expertIndex = appState.data.experts.findIndex(e => e.userId === userId);
+                if (expertIndex !== -1) {
+                    appState.data.experts.splice(expertIndex, 1);
+                    user.isExpert = false;
+                    
+                    renderAdminPanel();
+                    renderHomePage();
+                    alert(`${user.name} 회원이 전문가 목록에서 제외되었습니다.`);
+                }
+            }
+        }
+
+        // 회원 삭제 함수
+        function deleteUser(id) {
+            if (confirm('정말 이 회원을 삭제하시겠습니까?')) {
+                // 해당 회원이 전문가인 경우 전문가 목록에서도 제거
+                const expertIndex = appState.data.experts.findIndex(e => e.userId === id);
+                if (expertIndex !== -1) {
+                    appState.data.experts.splice(expertIndex, 1);
+                }
+                
+                appState.data.users = appState.data.users.filter(u => u.id !== id);
+                renderAdminPanel();
+                renderHomePage();
+                alert('회원이 삭제되었습니다.');
+            }
+        }
+
+        // 전문가 저장 함수
+        function saveExpert(id) {
+            const expert = appState.data.experts.find(e => e.id === id);
+            if (expert) {
+                expert.name = $(`input[data-id="${id}"][data-field="name"]`).val();
+                expert.specialty = $(`input[data-id="${id}"][data-field="specialty"]`).val();
+                expert.experience = $(`input[data-id="${id}"][data-field="experience"]`).val();
+                expert.location = $(`input[data-id="${id}"][data-field="location"]`).val();
+                expert.phone = $(`input[data-id="${id}"][data-field="phone"]`).val();
+                expert.image = $(`input[data-id="${id}"][data-field="image"]`).val(); // 이미지 URL 저장
+                
+                renderHomePage();
+                alert('전문가 정보가 저장되었습니다.');
+            }
+        }
+
+        // 전문가 이미지 업데이트 함수
+        function updateExpertImage(id, imageUrl) {
+            const expert = appState.data.experts.find(e => e.id === id);
+            if (expert) {
+                expert.image = imageUrl;
+                renderAdminPanel();
+                renderHomePage();
+                alert('전문가 이미지가 업데이트되었습니다.');
+            }
+        }
+
+        // 전문가 삭제 함수
+        function deleteExpert(id) {
+            if (confirm('정말 이 전문가를 삭제하시겠습니까?')) {
+                // 전문가와 연동된 회원의 isExpert 상태 업데이트
+                const expert = appState.data.experts.find(e => e.id === id);
+                if (expert && expert.userId) {
+                    const user = appState.data.users.find(u => u.id === expert.userId);
+                    if (user) {
+                        user.isExpert = false;
+                    }
+                }
+                
+                appState.data.experts = appState.data.experts.filter(e => e.id !== id);
+                renderAdminPanel();
+                renderHomePage();
+                alert('전문가가 삭제되었습니다.');
+            }
+        }
+
+        // 게시글 저장 함수
+        function savePost(id) {
+            const post = appState.data.posts.find(p => p.id === id);
+            if (post) {
+                post.title = $(`input[data-id="${id}"][data-field="title"]`).val();
+                post.author = $(`input[data-id="${id}"][data-field="author"]`).val();
+                post.category = $(`select[data-id="${id}"][data-field="category"]`).val();
+                
+                renderAdminPanel();
+                renderCommunityPage();
+                renderHomePage();
+                alert('게시글이 저장되었습니다.');
+            }
+        }
+
+        // 게시글 삭제 함수
+        function deletePost(id) {
+            if (confirm('정말 이 게시글을 삭제하시겠습니까?')) {
+                appState.data.posts = appState.data.posts.filter(p => p.id !== id);
+                renderAdminPanel();
+                renderCommunityPage();
+                renderHomePage();
+                alert('게시글이 삭제되었습니다.');
+            }
+        }
+
+        // 마켓 아이템 저장 함수
+        function saveMarketItem(id) {
+            const item = appState.data.marketItems.find(i => i.id === id);
+            if (item) {
+                item.name = $(`input[data-id="${id}"][data-field="name"]`).val();
+                item.price = $(`input[data-id="${id}"][data-field="price"]`).val();
+                item.category = $(`select[data-id="${id}"][data-field="category"]`).val();
+                
+                renderAdminPanel();
+                renderMarketPage();
+                alert('상품 정보가 저장되었습니다.');
+            }
+        }
+
+        // 마켓 아이템 삭제 함수
+        function deleteMarketItem(id) {
+            if (confirm('정말 이 상품을 삭제하시겠습니까?')) {
+                appState.data.marketItems = appState.data.marketItems.filter(i => i.id !== id);
+                renderAdminPanel();
+                renderMarketPage();
+                alert('상품이 삭제되었습니다.');
+            }
+        }
+
+        // 견적 요청 저장 함수
+        function saveQuote(id) {
+            const quote = appState.data.quotes.find(q => q.id === id);
+            if (quote) {
+                quote.title = $(`textarea[data-id="${id}"][data-field="title"]`).val();
+                quote.author = $(`input[data-id="${id}"][data-field="author"]`).val();
+                quote.location = $(`input[data-id="${id}"][data-field="location"]`).val();
+                quote.status = $(`select[data-id="${id}"][data-field="status"]`).val();
+                
+                renderAdminPanel();
+                renderQuotePage();
+                alert('견적 요청이 저장되었습니다.');
+            }
+        }
+
+        // 견적 요청 삭제 함수
+        function deleteQuote(id) {
+            if (confirm('정말 이 견적 요청을 삭제하시겠습니까?')) {
+                appState.data.quotes = appState.data.quotes.filter(q => q.id !== id);
+                renderAdminPanel();
+                renderQuotePage();
+                alert('견적 요청이 삭제되었습니다.');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -892,6 +892,40 @@
             align-items: center;
             gap: 8px;
         }
+        
+        /* 개선된 부분에 대한 스타일 */
+        .market-image-upload {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .market-image-preview {
+            max-width: 100px;
+            max-height: 80px;
+            border-radius: 4px;
+            margin-top: 5px;
+        }
+        
+        /* 로그인 상태에서 히어로 버튼 숨김 */
+        .user-logged-in .hero-buttons {
+            display: none;
+        }
+        
+        .user-logged-in .service-buttons {
+            display: block;
+        }
+        
+        .service-buttons {
+            display: none;
+        }
+        
+        /* 관리자 문의 스타일 */
+        .admin-inquiry {
+            color: var(--zinc);
+            font-weight: 500;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -976,7 +1010,8 @@
                                     로그인 상태 유지
                                 </label>
                             </div>
-                            <a href="#" class="text-decoration-none">비밀번호 찾기</a>
+                            <!-- 비밀번호 찾기 → 관리자 문의로 변경 -->
+                            <a href="#" class="admin-inquiry" id="adminInquiryLink">관리자 문의</a>
                         </div>
                         <button type="submit" class="btn btn-zinc w-100 mt-3">로그인</button>
                     </form>
@@ -1379,7 +1414,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">연락처</label>
-                <input type="text" class="form-control" id="siteContact" value="02-1234-5678">
+                <input type="text" class="form-control" id="siteContact" value="02-711-1500">
             </div>
             <div class="mb-3">
                 <label class="form-label">메인 배너 이미지 URL</label>
@@ -1465,6 +1500,7 @@
                             <th>상품명</th>
                             <th>가격</th>
                             <th>카테고리</th>
+                            <th>이미지</th>
                             <th>구매 문의 수</th>
                             <th>작업</th>
                         </tr>
@@ -1575,14 +1611,31 @@
                         ZnWork는 징크(아연 도금) 전문 건설 마감 분야의 정보 공유와 전문가 연결을 위한 플랫폼입니다.
                         기술 자료, 전문가 찾기, 견적 요청 등 다양한 서비스를 제공합니다.
                     </p>
-                    <div class="mt-4">
+                    <div class="mt-4 hero-buttons">
                         <button class="btn btn-light btn-lg me-2" data-bs-toggle="modal" data-bs-target="#registerModal">회원가입</button>
                         <button class="btn btn-outline-light btn-lg" data-bs-toggle="modal" data-bs-target="#loginModal">로그인</button>
+                    </div>
+                    <div class="mt-4 service-buttons">
+                        <button class="btn btn-light btn-lg me-2" data-page="community">서비스 이용하기</button>
+                        <button class="btn btn-outline-light btn-lg" data-page="quote">견적 요청하기</button>
                     </div>
                 </div>
             </section>
 
-            <!-- 인기글 섹션 -->
+            <!-- 전문가 섹션 - 첫 번째로 이동 -->
+            <section class="py-5 bg-light">
+                <div class="container">
+                    <h2 class="text-center mb-5 editable">인기 전문가</h2>
+                    <div class="row" id="expertsContainer">
+                        <!-- 전문가 카드가 여기에 동적으로 추가됩니다 -->
+                    </div>
+                    <div class="text-center mt-4">
+                        <a href="#" class="btn btn-zinc">더 많은 전문가 보기</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 인기글 섹션 - 두 번째로 이동 -->
             <section class="popular-posts">
                 <div class="container">
                     <h2 class="text-center mb-4 editable">인기글</h2>
@@ -1595,7 +1648,7 @@
                 </div>
             </section>
 
-            <!-- 주요 기능 섹션 -->
+            <!-- 주요 기능 섹션 - 세 번째로 이동 -->
             <section class="py-5">
                 <div class="container">
                     <h2 class="text-center mb-5 editable">ZnWork 주요 기능</h2>
@@ -1639,19 +1692,6 @@
                                 </div>
                             </a>
                         </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 전문가 섹션 -->
-            <section class="py-5 bg-light">
-                <div class="container">
-                    <h2 class="text-center mb-5 editable">인기 전문가</h2>
-                    <div class="row" id="expertsContainer">
-                        <!-- 전문가 카드가 여기에 동적으로 추가됩니다 -->
-                    </div>
-                    <div class="text-center mt-4">
-                        <a href="#" class="btn btn-zinc">더 많은 전문가 보기</a>
                     </div>
                 </div>
             </section>
@@ -1995,7 +2035,7 @@
                 {
                     id: 1,
                     name: "관리자",
-                    email: "admin@znwork.com",
+                    email: "paljangglobal@gmail.com",
                     password: "admin123",
                     userType: "admin",
                     isExpert: false
@@ -2306,7 +2346,13 @@
             
             // 전화 문의 배지 클릭
             $('.call-badge').click(function() {
-                alert('전화 문의: 02-1234-5678');
+                alert('전화 문의: 02-711-1500');
+            });
+            
+            // 관리자 문의 링크 클릭 이벤트
+            $('#adminInquiryLink').click(function(e) {
+                e.preventDefault();
+                alert('관리자 문의: paljangglobal@gmail.com 또는 02-711-1500로 연락주세요.');
             });
             
             // 글쓰기 버튼 클릭
@@ -2703,6 +2749,73 @@
             $('#notificationIcon').click(function(e) {
                 e.preventDefault();
                 showNotifications();
+            });
+            
+            // 관리자 마켓 이미지 업로드 처리
+            $(document).on('click', '.upload-market-image-btn', function() {
+                const itemId = $(this).data('id');
+                const fileInput = $(`.market-image-upload[data-id="${itemId}"] input[type="file"]`)[0];
+                
+                if (fileInput.files.length === 0) {
+                    alert('이미지 파일을 선택해주세요.');
+                    return;
+                }
+                
+                const file = fileInput.files[0];
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    // Data URL로 이미지 저장
+                    const imageUrl = e.target.result;
+                    const item = appState.data.marketItems.find(i => i.id === itemId);
+                    if (item) {
+                        item.image = imageUrl;
+                        renderAdminPanel();
+                        renderMarketPage();
+                        alert('이미지가 업로드되었습니다.');
+                    }
+                };
+                
+                reader.readAsDataURL(file);
+            });
+
+            // 관리자 마켓 이미지 URL 적용 처리
+            $(document).on('click', '.apply-market-image-url', function() {
+                const itemId = $(this).data('id');
+                const urlInput = $(`.market-image-upload[data-id="${itemId}"] input[type="text"]`);
+                const imageUrl = urlInput.val();
+                
+                if (!imageUrl) {
+                    alert('이미지 URL을 입력해주세요.');
+                    return;
+                }
+                
+                const item = appState.data.marketItems.find(i => i.id === itemId);
+                if (item) {
+                    item.image = imageUrl;
+                    renderAdminPanel();
+                    renderMarketPage();
+                    alert('이미지 URL이 적용되었습니다.');
+                }
+            });
+
+            // 관리자 마켓 이미지 미리보기
+            $(document).on('input', '.market-image-url', function() {
+                const itemId = $(this).data('id');
+                const url = $(this).val();
+                const preview = $(`.market-image-preview[data-id="${itemId}"]`);
+                
+                if (url) {
+                    preview.attr('src', url).show();
+                } else {
+                    preview.hide();
+                }
+            });
+
+            // 비밀번호 초기화 버튼 클릭 이벤트
+            $(document).on('click', '.reset-password-btn', function() {
+                const userId = $(this).data('id');
+                resetUserPassword(userId);
             });
         });
 
@@ -3231,7 +3344,7 @@
 
         // 관리자 패널 렌더링 함수
         function renderAdminPanel() {
-            // 회원 테이블 렌더링
+            // 회원 테이블 렌더링 - 비밀번호 초기화 버튼 추가
             const usersTableBody = $('#usersTableBody');
             usersTableBody.empty();
             
@@ -3259,6 +3372,7 @@
                         </td>
                         <td class="actions">
                             <button class="btn btn-sm btn-warning save-user" data-id="${user.id}">저장</button>
+                            <button class="btn btn-sm btn-info reset-password-btn" data-id="${user.id}">비밀번호 초기화</button>
                             <button class="btn btn-sm btn-danger delete-user" data-id="${user.id}">삭제</button>
                         </td>
                     </tr>
@@ -3315,7 +3429,7 @@
                 postsTableBody.append(postRow);
             });
             
-            // 마켓 아이템 테이블 렌더링
+            // 마켓 아이템 테이블 렌더링 - 이미지 업로드 기능 추가
             const marketItemsTableBody = $('#marketItemsTableBody');
             marketItemsTableBody.empty();
             
@@ -3331,6 +3445,15 @@
                                 <option value="보조 자재" ${item.category === '보조 자재' ? 'selected' : ''}>보조 자재</option>
                                 <option value="안전 장비" ${item.category === '안전 장비' ? 'selected' : ''}>안전 장비</option>
                             </select>
+                        </td>
+                        <td>
+                            <div class="market-image-upload" data-id="${item.id}">
+                                <input type="text" class="form-control form-control-sm market-image-url" data-id="${item.id}" value="${item.image}" placeholder="이미지 URL">
+                                <button class="btn btn-sm btn-secondary apply-market-image-url" data-id="${item.id}">URL 적용</button>
+                                <input type="file" class="form-control form-control-sm" data-id="${item.id}" accept="image/*">
+                                <button class="btn btn-sm btn-primary upload-market-image-btn" data-id="${item.id}">파일 업로드</button>
+                                <img src="${item.image}" class="market-image-preview" data-id="${item.id}" style="max-width: 100px; max-height: 80px; ${item.image ? '' : 'display: none;'}">
+                            </div>
                         </td>
                         <td>${item.purchaseInquiries || 0}</td>
                         <td class="actions">
@@ -3436,6 +3559,20 @@
                 
                 renderAdminPanel();
                 alert('회원 정보가 저장되었습니다.');
+            }
+        }
+
+        // 비밀번호 초기화 함수
+        function resetUserPassword(id) {
+            if (confirm('정말 이 회원의 비밀번호를 초기화하시겠습니까?\n초기화된 비밀번호는 "0000"입니다.')) {
+                const user = appState.data.users.find(u => u.id === id);
+                if (user) {
+                    // 비밀번호를 "0000"으로 초기화
+                    user.password = "0000";
+                    
+                    renderAdminPanel();
+                    alert(`${user.name} 회원의 비밀번호가 "0000"으로 초기화되었습니다.`);
+                }
             }
         }
 

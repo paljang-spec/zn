@@ -172,31 +172,6 @@
             font-weight: 500;
         }
         
-        /* 전화 문의 배지 */
-        .call-badge {
-            position: fixed;
-            bottom: 70px;
-            right: 30px;
-            z-index: 1000;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--zinc), var(--zinc-dark));
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .call-badge:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-        }
-        
         /* 인기글 섹션 */
         .popular-posts {
             background-color: white;
@@ -222,14 +197,6 @@
             
             .hero-description {
                 font-size: 1.1rem;
-            }
-            
-            .call-badge {
-                bottom: 60px;
-                right: 20px;
-                width: 50px;
-                height: 50px;
-                font-size: 1.2rem;
             }
             
             .expert-actions {
@@ -401,14 +368,6 @@
         
         .skip-nav:focus {
             top: 0;
-        }
-        
-        /* 간편 로그인 */
-        .quick-login {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            z-index: 1000;
         }
         
         /* 페이지 컨텐츠 */
@@ -1365,13 +1324,6 @@
         </div>
     </div>
 
-    <!-- 간편 로그인 버튼 -->
-    <div class="quick-login">
-        <button class="btn btn-zinc btn-sm" data-bs-toggle="tooltip" data-bs-placement="right" title="빠른 관리자 접속" id="quickAdminLogin">
-            <i class="fas fa-user-cog"></i>
-        </button>
-    </div>
-
     <!-- 관리자 패널 토글 버튼 -->
     <div class="admin-toggle admin-only" id="adminPanelToggle">
         관리자 패널
@@ -1866,11 +1818,6 @@
         </div>
     </main>
 
-    <!-- 전화 문의 배지 -->
-    <div class="call-badge" data-bs-toggle="tooltip" data-bs-placement="left" title="전화 문의">
-        <i class="fas fa-phone"></i>
-    </div>
-
     <!-- 로딩 인디케이터 -->
     <div class="loading" id="loadingIndicator">
         <div class="spinner"></div>
@@ -2335,18 +2282,6 @@
             $('#closeAdminPanel, #adminOverlay').click(function() {
                 $('#adminPanel').removeClass('active');
                 $('#adminOverlay').removeClass('active');
-            });
-            
-            // 빠른 관리자 로그인 (개발용)
-            $('#quickAdminLogin').click(function() {
-                $('#loginEmail').val('admin@znwork.com');
-                $('#loginPassword').val('admin123');
-                $('#loginModal').modal('show');
-            });
-            
-            // 전화 문의 배지 클릭
-            $('.call-badge').click(function() {
-                alert('전화 문의: 02-711-1500');
             });
             
             // 관리자 문의 링크 클릭 이벤트
@@ -3585,6 +3520,7 @@
                 // 회원을 전문가로 등록
                 const existingExpert = appState.data.experts.find(e => e.userId === userId);
                 if (!existingExpert) {
+                    // 새 전문가 생성
                     const newExpert = {
                         id: appState.data.experts.length + 1,
                         name: user.name,
@@ -3599,38 +3535,37 @@
                     
                     appState.data.experts.push(newExpert);
                     user.isExpert = true;
-                    
-                    renderAdminPanel();
-                    renderHomePage();
-                    alert(`${user.name} 회원이 전문가로 등록되었습니다.`);
                 }
             } else {
-                // 회원을 전문가에서 제외
+                // 회원의 전문가 등록 해제
                 const expertIndex = appState.data.experts.findIndex(e => e.userId === userId);
                 if (expertIndex !== -1) {
                     appState.data.experts.splice(expertIndex, 1);
                     user.isExpert = false;
-                    
-                    renderAdminPanel();
-                    renderHomePage();
-                    alert(`${user.name} 회원이 전문가 목록에서 제외되었습니다.`);
                 }
             }
+            
+            renderAdminPanel();
+            renderHomePage();
         }
 
         // 회원 삭제 함수
         function deleteUser(id) {
             if (confirm('정말 이 회원을 삭제하시겠습니까?')) {
-                // 해당 회원이 전문가인 경우 전문가 목록에서도 제거
-                const expertIndex = appState.data.experts.findIndex(e => e.userId === id);
-                if (expertIndex !== -1) {
-                    appState.data.experts.splice(expertIndex, 1);
+                const userIndex = appState.data.users.findIndex(u => u.id === id);
+                if (userIndex !== -1) {
+                    appState.data.users.splice(userIndex, 1);
+                    
+                    // 관련 전문가도 삭제
+                    const expertIndex = appState.data.experts.findIndex(e => e.userId === id);
+                    if (expertIndex !== -1) {
+                        appState.data.experts.splice(expertIndex, 1);
+                    }
+                    
+                    renderAdminPanel();
+                    renderHomePage();
+                    alert('회원이 삭제되었습니다.');
                 }
-                
-                appState.data.users = appState.data.users.filter(u => u.id !== id);
-                renderAdminPanel();
-                renderHomePage();
-                alert('회원이 삭제되었습니다.');
             }
         }
 
@@ -3643,40 +3578,25 @@
                 expert.experience = $(`input[data-id="${id}"][data-field="experience"]`).val();
                 expert.location = $(`input[data-id="${id}"][data-field="location"]`).val();
                 expert.phone = $(`input[data-id="${id}"][data-field="phone"]`).val();
-                expert.image = $(`input[data-id="${id}"][data-field="image"]`).val(); // 이미지 URL 저장
+                expert.image = $(`input[data-id="${id}"][data-field="image"]`).val();
                 
-                renderHomePage();
-                alert('전문가 정보가 저장되었습니다.');
-            }
-        }
-
-        // 전문가 이미지 업데이트 함수
-        function updateExpertImage(id, imageUrl) {
-            const expert = appState.data.experts.find(e => e.id === id);
-            if (expert) {
-                expert.image = imageUrl;
                 renderAdminPanel();
                 renderHomePage();
-                alert('전문가 이미지가 업데이트되었습니다.');
+                alert('전문가 정보가 저장되었습니다.');
             }
         }
 
         // 전문가 삭제 함수
         function deleteExpert(id) {
             if (confirm('정말 이 전문가를 삭제하시겠습니까?')) {
-                // 전문가와 연동된 회원의 isExpert 상태 업데이트
-                const expert = appState.data.experts.find(e => e.id === id);
-                if (expert && expert.userId) {
-                    const user = appState.data.users.find(u => u.id === expert.userId);
-                    if (user) {
-                        user.isExpert = false;
-                    }
+                const expertIndex = appState.data.experts.findIndex(e => e.id === id);
+                if (expertIndex !== -1) {
+                    appState.data.experts.splice(expertIndex, 1);
+                    
+                    renderAdminPanel();
+                    renderHomePage();
+                    alert('전문가가 삭제되었습니다.');
                 }
-                
-                appState.data.experts = appState.data.experts.filter(e => e.id !== id);
-                renderAdminPanel();
-                renderHomePage();
-                alert('전문가가 삭제되었습니다.');
             }
         }
 
@@ -3698,11 +3618,15 @@
         // 게시글 삭제 함수
         function deletePost(id) {
             if (confirm('정말 이 게시글을 삭제하시겠습니까?')) {
-                appState.data.posts = appState.data.posts.filter(p => p.id !== id);
-                renderAdminPanel();
-                renderCommunityPage();
-                renderHomePage();
-                alert('게시글이 삭제되었습니다.');
+                const postIndex = appState.data.posts.findIndex(p => p.id === id);
+                if (postIndex !== -1) {
+                    appState.data.posts.splice(postIndex, 1);
+                    
+                    renderAdminPanel();
+                    renderCommunityPage();
+                    renderHomePage();
+                    alert('게시글이 삭제되었습니다.');
+                }
             }
         }
 
@@ -3716,17 +3640,21 @@
                 
                 renderAdminPanel();
                 renderMarketPage();
-                alert('상품 정보가 저장되었습니다.');
+                alert('마켓 아이템이 저장되었습니다.');
             }
         }
 
         // 마켓 아이템 삭제 함수
         function deleteMarketItem(id) {
-            if (confirm('정말 이 상품을 삭제하시겠습니까?')) {
-                appState.data.marketItems = appState.data.marketItems.filter(i => i.id !== id);
-                renderAdminPanel();
-                renderMarketPage();
-                alert('상품이 삭제되었습니다.');
+            if (confirm('정말 이 마켓 아이템을 삭제하시겠습니까?')) {
+                const itemIndex = appState.data.marketItems.findIndex(i => i.id === id);
+                if (itemIndex !== -1) {
+                    appState.data.marketItems.splice(itemIndex, 1);
+                    
+                    renderAdminPanel();
+                    renderMarketPage();
+                    alert('마켓 아이템이 삭제되었습니다.');
+                }
             }
         }
 
@@ -3748,10 +3676,73 @@
         // 견적 요청 삭제 함수
         function deleteQuote(id) {
             if (confirm('정말 이 견적 요청을 삭제하시겠습니까?')) {
-                appState.data.quotes = appState.data.quotes.filter(q => q.id !== id);
+                const quoteIndex = appState.data.quotes.findIndex(q => q.id === id);
+                if (quoteIndex !== -1) {
+                    appState.data.quotes.splice(quoteIndex, 1);
+                    
+                    renderAdminPanel();
+                    renderQuotePage();
+                    alert('견적 요청이 삭제되었습니다.');
+                }
+            }
+        }
+
+        // 전문가 이미지 업데이트 함수
+        function updateExpertImage(id, imageUrl) {
+            const expert = appState.data.experts.find(e => e.id === id);
+            if (expert) {
+                expert.image = imageUrl;
+                renderHomePage();
                 renderAdminPanel();
-                renderQuotePage();
-                alert('견적 요청이 삭제되었습니다.');
+                alert('전문가 이미지가 업데이트되었습니다.');
+            }
+        }
+
+        // 전문가 수정 함수
+        function editExpert(id) {
+            const expert = appState.data.experts.find(e => e.id === id);
+            if (expert) {
+                // 전문가 정보를 편집 모드로 전환
+                // 실제 구현에서는 모달 또는 인라인 편집을 구현할 수 있음
+                alert(`${expert.name} 전문가 정보를 수정하려면 관리자 패널을 사용하세요.`);
+                $('#adminPanel').addClass('active');
+                $('#adminOverlay').addClass('active');
+            }
+        }
+
+        // 게시글 수정 함수
+        function editPost(id) {
+            const post = appState.data.posts.find(p => p.id === id);
+            if (post) {
+                // 게시글 정보를 편집 모드로 전환
+                // 실제 구현에서는 모달 또는 인라인 편집을 구현할 수 있음
+                alert(`${post.title} 게시글을 수정하려면 관리자 패널을 사용하세요.`);
+                $('#adminPanel').addClass('active');
+                $('#adminOverlay').addClass('active');
+            }
+        }
+
+        // 마켓 아이템 수정 함수
+        function editMarketItem(id) {
+            const item = appState.data.marketItems.find(i => i.id === id);
+            if (item) {
+                // 마켓 아이템 정보를 편집 모드로 전환
+                // 실제 구현에서는 모달 또는 인라인 편집을 구현할 수 있음
+                alert(`${item.name} 상품을 수정하려면 관리자 패널을 사용하세요.`);
+                $('#adminPanel').addClass('active');
+                $('#adminOverlay').addClass('active');
+            }
+        }
+
+        // 견적 요청 수정 함수
+        function editQuote(id) {
+            const quote = appState.data.quotes.find(q => q.id === id);
+            if (quote) {
+                // 견적 요청 정보를 편집 모드로 전환
+                // 실제 구현에서는 모달 또는 인라인 편집을 구현할 수 있음
+                alert(`${quote.title} 견적 요청을 수정하려면 관리자 패널을 사용하세요.`);
+                $('#adminPanel').addClass('active');
+                $('#adminOverlay').addClass('active');
             }
         }
     </script>
